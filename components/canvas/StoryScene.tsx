@@ -264,6 +264,12 @@ export function StoryScene({
     }
   });
 
+  // Enforce minimum fallback opacity so 3D models do not vanish when scroll calculations lag
+  const summerOpacity =
+    activeSectionIdx <= 1 ? Math.max(opacities.summer, 0.9) : opacities.summer;
+  const springOpacity =
+    activeSectionIdx === 5 ? Math.max(opacities.spring, 0.9) : opacities.spring;
+
   return (
     <>
       {/* Ambient Light smoothly modulated by SEASON_PALETTES */}
@@ -283,9 +289,9 @@ export function StoryScene({
       <fog ref={fogRef} attach="fog" args={['#070503', 5, 24]} />
 
       {/* Strict conditional unmounting (opacities[season] > 0.01) to lock 60 FPS */}
-      {opacities.summer > 0.01 && (
+      {summerOpacity > 0.01 && (
         <SummerHeatScene
-          opacity={opacities.summer}
+          opacity={summerOpacity}
           isMobile={isMobile}
           densityFactor={densityFactor}
         />
@@ -304,9 +310,9 @@ export function StoryScene({
           densityFactor={densityFactor}
         />
       )}
-      {opacities.spring > 0.01 && (
+      {springOpacity > 0.01 && (
         <DigitalSpringScene
-          opacity={opacities.spring}
+          opacity={springOpacity}
           isMobile={isMobile}
           densityFactor={densityFactor}
         />

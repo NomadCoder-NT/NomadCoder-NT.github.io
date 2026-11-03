@@ -38,7 +38,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
   }, []);
 
   useFrame((state) => {
-    if (opacity <= 0.001) return;
+    if (opacity <= 0.0001) return;
 
     const time = state.clock.elapsedTime;
 
@@ -58,14 +58,15 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
   });
 
   // Early return culling
-  if (opacity <= 0.001) return null;
+  if (opacity <= 0.0001) return null;
 
   return (
     <PresentationControls
-      global={false}
+      global={true}
       cursor={true}
-      snap
-      speed={1.5}
+      snap={true}
+      speed={2}
+      zoom={1}
       polar={[-Math.PI / 6, Math.PI / 6]}
       azimuth={[-Math.PI, Math.PI]}
     >
