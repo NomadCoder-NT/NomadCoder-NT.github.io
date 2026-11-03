@@ -28,67 +28,50 @@ export function StoryHero({ onBeginJourney, onOpenTerminal }: StoryHeroProps) {
         style={{ y: parallaxY, opacity: opacityFade }}
         className="max-w-4xl mx-auto space-y-6"
       >
-        {/* Editorial Subtitle Kicker (Zero pill, clean unboxed text) */}
+        {/* Editorial Subtitle Kicker */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-2 text-xs md:text-sm font-mono text-neutral-400"
+          className="flex flex-wrap items-center justify-center gap-2 text-xs md:text-sm font-mono tracking-widest text-amber-400 font-semibold uppercase"
         >
-          <span className="text-amber-400 font-semibold">nomadcoder-nt</span>
-          <span aria-hidden="true">·</span>
-          <span>Performance Marketing & Digital Strategy</span>
-          <span aria-hidden="true">·</span>
-          <span className="text-emerald-400">AI Systems & 3D WebGL Engineering</span>
+          <span>NEERAJ THAMBA // FOUNDER & SYSTEMS STRATEGIST</span>
         </motion.div>
 
-        {/* Primary Headline with balanced wrap */}
+        {/* Primary Headline: High-Contrast Editorial Typography */}
         <motion.h1
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-neutral-100 max-w-4xl leading-tight sm:leading-none text-balance"
+          className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white max-w-5xl leading-[1.05] sm:leading-[1.0] text-balance"
         >
-          The Seasons of Growth
+          Systems, Capital & Physical Form.
         </motion.h1>
 
-        {/* Storytelling Subheading */}
+        {/* Storytelling Subheading (Monospace, text-neutral-400) */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-base sm:text-lg md:text-xl text-neutral-300 max-w-2xl mx-auto leading-relaxed"
+          className="text-sm sm:text-base md:text-lg font-mono text-neutral-400 max-w-3xl mx-auto leading-relaxed"
         >
-          An atmospheric spatial journey across eight transformative chapters—from enterprise hardware and multi-million dollar ad networks to generative intelligence and 3D WebGL graphics.
+          Eight years spanning edge hardware diagnostics at Amazon, enterprise compute at Dell, $4.2M in Google ad auctions, private wealth allocation at ICICI Bank, and sub-millimeter 3D additive heritage manufacturing at Templecity Atelier.
         </motion.p>
 
-        {/* Lifecycle Season Breadcrumbs */}
+        {/* Clean Monospace Index Tracker */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-4 max-w-2xl mx-auto text-left"
+          className="py-4 border-y border-white/[0.08] max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-mono tracking-wider text-neutral-300"
         >
-          <div className="p-3 rounded-xl bg-neutral-950/60 border border-white/5 backdrop-blur-sm">
-            <span className="text-[10px] font-mono text-amber-400 block font-semibold">01 · Summer</span>
-            <span className="text-xs text-neutral-300 font-medium block">Hardware Pressure</span>
-            <span className="text-[11px] text-neutral-500 block">Amazon & Dell</span>
-          </div>
-          <div className="p-3 rounded-xl bg-neutral-950/60 border border-white/5 backdrop-blur-sm">
-            <span className="text-[10px] font-mono text-sky-400 block font-semibold">02 · Monsoon</span>
-            <span className="text-xs text-neutral-300 font-medium block">Performance Data</span>
-            <span className="text-[11px] text-neutral-500 block">Google Ops & Accenture</span>
-          </div>
-          <div className="p-3 rounded-xl bg-neutral-950/60 border border-white/5 backdrop-blur-sm">
-            <span className="text-[10px] font-mono text-yellow-400 block font-semibold">03 · Autumn</span>
-            <span className="text-xs text-neutral-300 font-medium block">Compound Yield</span>
-            <span className="text-[11px] text-neutral-500 block">ICICI Bank Private</span>
-          </div>
-          <div className="p-3 rounded-xl bg-neutral-950/60 border border-white/5 backdrop-blur-sm">
-            <span className="text-[10px] font-mono text-emerald-400 block font-semibold">04 · Spring</span>
-            <span className="text-xs text-neutral-300 font-medium block">Spatial & Neural</span>
-            <span className="text-[11px] text-neutral-500 block">Templecity & AI</span>
-          </div>
+          <span className="hover:text-amber-400 transition-colors">01 HARDWARE</span>
+          <span className="text-neutral-600 select-none">·</span>
+          <span className="hover:text-cyan-400 transition-colors">02 ADTECH</span>
+          <span className="text-neutral-600 select-none">·</span>
+          <span className="hover:text-yellow-400 transition-colors">03 WEALTH</span>
+          <span className="text-neutral-600 select-none">·</span>
+          <span className="hover:text-emerald-400 transition-colors">04 ADDITIVE CRAFT</span>
         </motion.div>
 
         {/* Action CTAs */}

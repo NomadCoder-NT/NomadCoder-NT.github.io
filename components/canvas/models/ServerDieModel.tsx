@@ -50,11 +50,11 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
       orbitGroupRef.current.rotation.y -= delta * 0.38;
     }
 
-    // Microprocessor core clock pulse
+    // Microprocessor core clock pulse (boosted emissive intensity)
     if (coreDieRef.current) {
       const mat = coreDieRef.current.material as THREE.MeshStandardMaterial;
       if (mat) {
-        mat.emissiveIntensity = (0.7 + 0.3 * Math.sin(time * 3.5)) * opacity;
+        mat.emissiveIntensity = (1.05 + 0.4 * Math.sin(time * 3.5)) * opacity;
       }
     }
   });
@@ -63,7 +63,11 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
   if (opacity <= 0.01) return null;
 
   return (
-    <group ref={dieGroupRef} position={[isMobile ? 0 : 2.5, 0, -2]}>
+    <group
+      ref={dieGroupRef}
+      position={[isMobile ? 0 : 2.6, 0, -1.8]}
+      scale={isMobile ? [1.1, 1.1, 1.1] : [1.3, 1.3, 1.3]}
+    >
       {/* 1. Dark Substrate Base Package */}
       <mesh position={[0, -0.05, 0]}>
         <boxGeometry args={[3.2, 0.12, 3.2]} />
@@ -83,7 +87,7 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
           color="#d97706"
           wireframe
           transparent
-          opacity={opacity * 0.65}
+          opacity={opacity * 0.75}
         />
       </mesh>
 
@@ -95,11 +99,11 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
             <meshStandardMaterial
               color="#facc15"
               emissive="#a16207"
-              emissiveIntensity={0.6 * opacity}
+              emissiveIntensity={0.85 * opacity}
               roughness={0.15}
               metalness={0.95}
               transparent
-              opacity={opacity * 0.9}
+              opacity={opacity * 0.95}
             />
           </mesh>
         ))}
@@ -110,11 +114,11 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
         <boxGeometry args={[1.85, 0.24, 1.85]} />
         <meshStandardMaterial
           color="#f59e0b"
-          emissive="#b45309"
-          emissiveIntensity={0.8 * opacity}
+          emissive="#d97706"
+          emissiveIntensity={1.1 * opacity}
           wireframe
           transparent
-          opacity={opacity * 0.9}
+          opacity={opacity * 0.95}
         />
       </mesh>
 
@@ -156,11 +160,11 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
         <torusGeometry args={[1.45, 0.045, 12, 48]} />
         <meshStandardMaterial
           color="#d97706"
-          emissive="#9a3412"
-          emissiveIntensity={0.5 * opacity}
+          emissive="#d97706"
+          emissiveIntensity={0.75 * opacity}
           wireframe
           transparent
-          opacity={opacity * 0.75}
+          opacity={opacity * 0.85}
         />
       </mesh>
 
@@ -179,10 +183,10 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
                 <meshStandardMaterial
                   color="#fbbf24"
                   emissive="#d97706"
-                  emissiveIntensity={0.6 * opacity}
+                  emissiveIntensity={0.85 * opacity}
                   wireframe
                   transparent
-                  opacity={opacity * 0.75}
+                  opacity={opacity * 0.85}
                 />
               </mesh>
 

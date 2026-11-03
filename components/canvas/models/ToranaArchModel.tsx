@@ -47,11 +47,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
       archGroupRef.current.rotation.y = Math.sin(time * 0.4) * 0.22;
     }
 
-    // Sacred Kalasa finial pulse
+    // Sacred Kalasa finial pulse (boosted emissive intensity)
     if (kalasaRef.current) {
       const mat = kalasaRef.current.material as THREE.MeshStandardMaterial;
       if (mat) {
-        mat.emissiveIntensity = (0.75 + 0.25 * Math.sin(time * 2.8)) * opacity;
+        mat.emissiveIntensity = (1.15 + 0.35 * Math.sin(time * 2.8)) * opacity;
       }
     }
   });
@@ -60,7 +60,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
   if (opacity <= 0.01) return null;
 
   return (
-    <group ref={archGroupRef} position={[isMobile ? 0 : 2.6, 0, -2]}>
+    <group
+      ref={archGroupRef}
+      position={[isMobile ? 0 : 2.7, 0, -1.8]}
+      scale={isMobile ? [1.1, 1.1, 1.1] : [1.3, 1.3, 1.3]}
+    >
       {/* 1. Dual Cylinder Pillars with Capital Brackets */}
       {/* Left Pillar */}
       <group position={[-1.8, 0, 0]}>
@@ -70,10 +74,10 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
           <meshStandardMaterial
             color="#10b981"
             emissive="#065f46"
-            emissiveIntensity={0.65 * opacity}
+            emissiveIntensity={0.95 * opacity}
             wireframe
             transparent
-            opacity={opacity * 0.8}
+            opacity={opacity * 0.85}
           />
         </mesh>
 
@@ -117,10 +121,10 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
           <meshStandardMaterial
             color="#10b981"
             emissive="#065f46"
-            emissiveIntensity={0.65 * opacity}
+            emissiveIntensity={0.95 * opacity}
             wireframe
             transparent
-            opacity={opacity * 0.8}
+            opacity={opacity * 0.85}
           />
         </mesh>
 
@@ -200,10 +204,10 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
         <meshStandardMaterial
           color="#06b6d4"
           emissive="#0891b2"
-          emissiveIntensity={0.8 * opacity}
+          emissiveIntensity={1.15 * opacity}
           wireframe
           transparent
-          opacity={opacity * 0.8}
+          opacity={opacity * 0.9}
         />
       </mesh>
 
@@ -213,7 +217,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
           color="#10b981"
           wireframe
           transparent
-          opacity={opacity * 0.65}
+          opacity={opacity * 0.75}
         />
       </mesh>
 
@@ -226,7 +230,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
             color="#06b6d4"
             wireframe
             transparent
-            opacity={opacity * 0.75}
+            opacity={opacity * 0.85}
           />
         </mesh>
 
@@ -236,10 +240,10 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
           <meshStandardMaterial
             color="#10b981"
             emissive="#059669"
-            emissiveIntensity={0.85 * opacity}
+            emissiveIntensity={1.15 * opacity}
             wireframe
             transparent
-            opacity={opacity * 0.9}
+            opacity={opacity * 0.95}
           />
         </mesh>
 
@@ -249,10 +253,10 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
           <meshStandardMaterial
             color="#06b6d4"
             emissive="#0891b2"
-            emissiveIntensity={0.7 * opacity}
+            emissiveIntensity={0.95 * opacity}
             wireframe
             transparent
-            opacity={opacity * 0.85}
+            opacity={opacity * 0.9}
           />
         </mesh>
       </group>

@@ -52,7 +52,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
   {
     id: 'ignition',
     index: '01',
-    title: 'IGNITION',
+    title: 'THE BEDROCK',
     subtitle: 'Edge Hardware Diagnostics & Firmware Triage',
     organization: 'Amazon Development Centre',
     seasonId: 'summer',
@@ -61,7 +61,11 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
     role: 'Edge Hardware Diagnostics & Firmware Triage Specialist',
     location: 'India Operations',
     summary:
-      'Where the spark ignited: directly diagnosing and resolving low-level technical escalations across Amazon hardware ecosystems—Echo smart speakers, Fire TV streaming systems, and Kindle e-readers under intense operational volume.',
+      'Diagnosed firmware regressions, embedded Wi-Fi packet drops, and authentication timeouts across Echo, Fire TV, and Kindle devices. 85% first-contact resolution across high-volume operational queues.',
+    narrativeParagraphs: [
+      'I started at Amazon diagnosing real-time hardware regressions, embedded Wi-Fi packet drops, and authentication timeouts across Echo, Fire TV, and Kindle devices under immense operational load. Rather than relying on generic escalation tickets, I traced embedded logs, packet handshakes, and firmware versions directly to pinpoint where consumer edge devices failed.',
+      'Maintaining an 85% first-contact resolution across more than 50,000 escalations taught me how hardware behaves under real-world household conditions. This direct physical triage formed my engineering bedrock: high-level software abstractions are only as reliable as their lowest physical substrate.',
+    ],
     highlights: [
       'Engineered systematic triage trees for embedded firmware faults, Wi-Fi handshake packet drop, and authentication timeouts.',
       'Sustained an exceptional 85% first-contact resolution (FCR) rate across complex multi-device household network environments.',
@@ -72,7 +76,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
       { label: 'First Contact Res', value: '85%', detail: 'Consistently exceeded target benchmarks' },
       { label: 'Hardware Ecosystems', value: '3 Platforms', detail: 'Echo, Fire TV, Kindle' },
     ],
-    technologies: ['Edge Hardware Diagnostics', 'Firmware Triage', 'Network Handshakes', 'Embedded Device Telemetry', 'Incident Escalation'],
+    technologies: ['Edge Hardware Diagnostics', 'Firmware Triage', 'Network Handshakes', 'Embedded Device Telemetry', 'Incident Trees'],
     keyArtifact: 'Echo & Fire TV Low-Level Diagnostic Matrix',
     bridgeText: 'Understanding physical edge client hardware laid the bedrock for architecting commercial enterprise server compute.',
     quickSummary: 'Diagnosed 50,000+ edge hardware incidents across Echo, Fire TV, and Kindle with 85% first-contact resolution and embedded firmware triage.',
@@ -89,7 +93,11 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
     role: 'Enterprise Compute Architecture & Commercial Inside Sales Partner',
     location: 'Global Commercial Markets',
     summary:
-      'Transitioned from consumer edge hardware to industrial data center infrastructure: sizing custom enterprise server clusters, structuring multi-tier client configurations, and accelerating multinational B2B commercial procurement pipelines.',
+      'Configured enterprise PowerEdge rack/blade server specifications and Precision workstations for multinational commercial accounts. 118% quota attainment.',
+    narrativeParagraphs: [
+      'At Dell, I moved from consumer edge hardware into industrial data center compute. I configured enterprise PowerEdge rack and blade server specifications, high-throughput storage fabrics, and Precision workstations for multinational commercial accounts.',
+      'Bridging architectural compute sizing with fast-moving enterprise procurement, I achieved 118% annualized quota attainment while reducing custom build-to-order procurement cycles by 22%. It gave me a deep operational understanding of enterprise infrastructure, thermal limits, and hardware deployment at commercial scale.',
+    ],
     highlights: [
       'Architected bespoke Dell PowerEdge rack/blade server, storage array, and Precision workstation specifications for enterprise procurement.',
       'Achieved 118% annualized quota attainment across highly competitive multinational commercial segments.',
@@ -117,7 +125,11 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
     role: 'AdTech Telemetry Strategist & Google Ads Specialist',
     location: 'APAC Operations',
     summary:
-      'Immersed in the digital monsoon: dissecting billions of real-time ad auction signals, resolving mission-critical attribution and delivery anomalies, and engineering interactive telemetry dashboards for global multi-million dollar ad portfolios.',
+      'Escalation engineering for Google Ads auction delivery, conversion tracking anomalies, and Looker Studio/GA4 telemetry dashboards across $4.2M+ in annualized ad spend.',
+    narrativeParagraphs: [
+      'Joining the Google Operations Center, I stepped into the algorithmic heart of digital advertising. I handled escalation engineering for Google Ads auction delivery, conversion tracking anomalies, and Looker Studio/GA4 telemetry dashboards across $4.2M+ in annualized ad spend.',
+      'Managing complex auction dynamics across Search, Display, and Performance Max required treating advertising as a distributed computing problem. By engineering automated telemetry dashboards and executing 120+ structured A/B tests, I drove an average +34% ROAS lift across enterprise client portfolios.',
+    ],
     highlights: [
       'Orchestrated performance optimization cycles across massive Search, Display, and Video portfolios totaling $4.2M+ in annualized ad spend.',
       'Designed automated diagnostic dashboards in GA4 and Looker Studio tracking CPC volatility, CTR degradation, and auction bid competitiveness.',
@@ -145,7 +157,11 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
     role: 'Digital Strategy Consultant & Cloud Campaign Lead',
     location: 'Enterprise Client Operations',
     summary:
-      'Synthesizing enterprise consultative strategy with algorithmic marketing: guiding 340+ growing SMB enterprises through automated Value-Based Bidding migrations, first-party data ingestion, and cloud-driven scaling frameworks.',
+      'Advised 340+ SMBs on transitioning from legacy manual CPC to machine learning Value-Based Bidding and first-party CRM data ingestion.',
+    narrativeParagraphs: [
+      'At Accenture, I focused on consultative scaling for 340+ high-growth SMBs, translating machine learning ad infrastructure into profitable commercial outcomes. I guided business leadership through transitioning from legacy manual CPC bidding to AI-driven Value-Based Bidding models.',
+      'I engineered first-party data ingestion schemas to bridge offline CRM transactions back into automated bidding feedback loops, achieving a +48% post-consultation conversion lift and sustaining a 98.4% executive client satisfaction rating.',
+    ],
     highlights: [
       'Delivered strategic digital audits transitioning SMB leadership from rigid manual CPC to machine learning Value-Based Bidding.',
       'Formulated first-party data ingestion schemas integrating offline CRM conversions back into cloud advertising engines.',
@@ -173,7 +189,11 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
     role: 'Wealth & Trade Relationship Manager',
     location: 'Retail & Private Client Division',
     summary:
-      'The season of disciplined compounding: managing ₹12Cr+ in high-net-worth client assets ($50,000+ individual portfolios), structuring multi-asset risk parity allocations, and structuring trade finance and working capital facilities under rigorous compliance.',
+      'Managed wealth portfolios and trade finance relationships for high-net-worth clients and commercial exporters. Multi-asset risk parity allocation and trade credit underwriting.',
+    narrativeParagraphs: [
+      'At ICICI Bank, I transitioned from digital capital allocation to private wealth and commercial trade stewardship, managing wealth portfolios and trade finance relationships for high-net-worth clients and commercial exporters across ₹12Cr+ in assets under management.',
+      'I structured multi-asset risk parity portfolios balancing equity alpha, fixed income stability, and liquidity horizons, alongside underwriting trade credit facilities, cross-border letters of credit, and foreign exchange hedging. This discipline instilled an uncompromising respect for risk stewardship and real-world capital preservation.',
+    ],
     highlights: [
       'Engineered customized asset allocation portfolios balancing equity alpha, fixed income stability, and liquidity horizons.',
       'Structured bespoke trade finance credit lines, letters of credit (LC), and cross-border bank guarantees for commercial import/export clients.',
@@ -201,7 +221,11 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
     role: 'Co-Founder & Head of Spatial Design',
     location: 'Bhubaneswar / Digital Studio',
     summary:
-      'Where digital geometry touches physical craftsmanship: recreating the sacred architecture of Odisha’s 10th-century Mukteshvara Torana through high-resolution photogrammetry, parametric CAD modeling, CoreXY additive manufacturing, and artisanal cold-cast bronze finishing.',
+      'Founded a physical 3D manufacturing atelier in Bhubaneswar. Reverse-engineered the 10th-century Mukteshvara Torana arch into a 1.24M polygon parametric CAD sculpt, producing cold-cast bronze replicas with ±0.15mm tolerances on CoreXY and 12K MSLA machines.',
+    narrativeParagraphs: [
+      'In Bhubaneswar, I co-founded Templecity Atelier to merge 10th-century Kalinga temple architecture with precision digital manufacturing. I reverse-engineered the monumental Mukteshvara Torana arch into a watertight 1.24-million polygon parametric CAD sculpt derived from hundreds of photogrammetric exposures.',
+      'I engineered our production additive workflow across high-speed CoreXY 3D printers and 12K MSLA resin systems, achieving ±0.15mm fabrication tolerances with custom support topologies. Each piece is hand-finished in our proprietary cold-cast bronze formulation with atomized 325-mesh metal powder and authentic liver-of-sulfur antique patination.',
+    ],
     highlights: [
       'Sculpted a watertight 1.24-million polygon CAD reconstruction of the Mukteshvara arch from 480 photogrammetric exposures with zero non-manifold defects.',
       'Engineered custom CoreXY and MSLA 3D printing pipelines achieving ±0.15mm fabrication tolerance with micro-touchpoint support lattices.',
@@ -229,7 +253,11 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
     role: 'Full-Stack 3D WebGL Engineer & AI Systems Architect',
     location: 'Global Web / nomadcoder-nt',
     summary:
-      'The apex convergence: architecting immersive, butter-smooth 60 FPS spatial web applications using Next.js 15 App Router, React Three Fiber, custom GPU GLSL shaders, and autonomous hybrid vector RAG systems. Bridging 8+ years of hardware, AdTech, wealth, and manufacturing rigor into poetic engineering.',
+      'Full-stack 3D WebGL engineering, custom GPU GLSL shaders, and autonomous hybrid vector RAG systems. Bridging 8+ years of hardware, AdTech, wealth, and manufacturing rigor into poetic engineering.',
+    narrativeParagraphs: [
+      'nomadcoder-nt Studio represents the convergence of all these disciplines: full-stack 3D WebGL creative engineering, custom GPU GLSL shaders, and autonomous hybrid vector RAG systems. I build web experiences that treat the browser as a high-performance graphical engine rather than a static document viewer.',
+      'Every system here is engineered for zero-slop execution—60 FPS shader pipelines, sub-180ms semantic retrieval latencies, and human-crafted obsidian editorial design. It is where engineering rigor, capital allocation, and physical form unite.',
+    ],
     highlights: [
       'Engineered custom GPU vertex and fragment shaders for real-time particles, snowflakes, and ripples with zero-overhead early culling locking 60 FPS.',
       'Built production Retrieval-Augmented Generation (RAG) pipelines with hybrid vector semantic search, low-latency prompt schemas, and <1.2% hallucination rates.',

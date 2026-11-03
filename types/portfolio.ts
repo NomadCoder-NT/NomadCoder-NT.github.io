@@ -28,6 +28,7 @@ export interface NarrativeSectionData {
   role: string;
   location: string;
   summary: string;
+  narrativeParagraphs?: string[];
   highlights: string[];
   metrics: MetricHighlight[];
   technologies: string[];

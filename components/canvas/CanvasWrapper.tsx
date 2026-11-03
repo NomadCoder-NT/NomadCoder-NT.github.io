@@ -137,8 +137,9 @@ export function CanvasWrapper({
   }
 
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none -z-10">
+    <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
       <Canvas
+        className="pointer-events-auto"
         camera={{ position: [0, 0, 6.5], fov: isMobile ? 65 : 50 }}
         gl={{
           antialias: !isMobile,
@@ -164,9 +165,9 @@ export function CanvasWrapper({
         />
       </Canvas>
 
-      {/* Atmospheric Vignette & Dynamic Seasonal Color Scrim Wash */}
-      <div className={`absolute inset-0 bg-gradient-to-b ${ambientGlowClass} transition-colors duration-700 pointer-events-none`} />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-neutral-950/40 to-neutral-950/90 pointer-events-none" />
+      {/* Atmospheric Vignette & Dynamic Seasonal Color Scrim Wash: open on right side for 3D models */}
+      <div className={`absolute inset-0 bg-gradient-to-b ${ambientGlowClass} transition-colors duration-700 pointer-events-none opacity-50`} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,_var(--tw-gradient-stops))] from-transparent via-neutral-950/25 to-neutral-950/75 pointer-events-none" />
     </div>
   );
 }
