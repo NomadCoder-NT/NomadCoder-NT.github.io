@@ -14,6 +14,9 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
   const archGroupRef = useRef<THREE.Group>(null);
   const kalasaRef = useRef<THREE.Mesh>(null);
 
+  // Enforce visible fallback opacity so the model does not unmount or vanish if scroll calculations lag
+  const effectiveOpacity = Math.max(opacity, 0.85);
+
   // Parametric Mukteshvara Torana Arch mathematical curve points
   const { archCurveGeometry, innerCurveGeometry } = useMemo(() => {
     const outerPoints: THREE.Vector3[] = [];
@@ -38,7 +41,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
   }, []);
 
   useFrame((state) => {
-    if (opacity <= 0.0001) return;
+    if (effectiveOpacity <= 0.0001) return;
 
     const time = state.clock.elapsedTime;
 
@@ -52,13 +55,10 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
     if (kalasaRef.current) {
       const mat = kalasaRef.current.material as THREE.MeshStandardMaterial;
       if (mat) {
-        mat.emissiveIntensity = (2.2 + 0.8 * Math.sin(time * 2.8)) * opacity;
+        mat.emissiveIntensity = (2.2 + 0.8 * Math.sin(time * 2.8)) * effectiveOpacity;
       }
     }
   });
-
-  // Early return culling
-  if (opacity <= 0.0001) return null;
 
   return (
     <PresentationControls
@@ -75,6 +75,12 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
         position={[isMobile ? 0 : 1.6, isMobile ? -0.8 : -0.2, 0]}
         scale={isMobile ? 1.0 : 1.65}
       >
+        {/* Invisible solid interaction cylinder so mouse raycasters register hits effortlessly */}
+        <mesh visible={false}>
+          <cylinderGeometry args={[2.5, 2.5, 4, 16]} />
+          <meshBasicMaterial />
+        </mesh>
+
         {/* Dedicated Point Light for Cyber Emerald & Cyan Glow */}
         <pointLight color="#10b981" intensity={7} distance={10} position={[0, 2, 2.5]} />
 
@@ -87,11 +93,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
             <meshStandardMaterial
               color="#00ffcc"
               emissive="#10b981"
-              emissiveIntensity={3.5 * opacity}
+              emissiveIntensity={3.5 * effectiveOpacity}
               toneMapped={false}
               wireframe
               transparent
-              opacity={opacity * 0.9}
+              opacity={effectiveOpacity * 0.9}
             />
           </mesh>
 
@@ -101,11 +107,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
             <meshStandardMaterial
               color="#00ffcc"
               emissive="#10b981"
-              emissiveIntensity={2.5 * opacity}
+              emissiveIntensity={2.5 * effectiveOpacity}
               toneMapped={false}
               wireframe
               transparent
-              opacity={opacity * 0.85}
+              opacity={effectiveOpacity * 0.85}
             />
           </mesh>
 
@@ -117,7 +123,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
               wireframe
               toneMapped={false}
               transparent
-              opacity={opacity * 0.75}
+              opacity={effectiveOpacity * 0.75}
             />
           </mesh>
           <mesh position={[0, -2.65, 0]}>
@@ -127,7 +133,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
               wireframe
               toneMapped={false}
               transparent
-              opacity={opacity * 0.65}
+              opacity={effectiveOpacity * 0.65}
             />
           </mesh>
         </group>
@@ -140,11 +146,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
             <meshStandardMaterial
               color="#00ffcc"
               emissive="#10b981"
-              emissiveIntensity={3.5 * opacity}
+              emissiveIntensity={3.5 * effectiveOpacity}
               toneMapped={false}
               wireframe
               transparent
-              opacity={opacity * 0.9}
+              opacity={effectiveOpacity * 0.9}
             />
           </mesh>
 
@@ -154,11 +160,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
             <meshStandardMaterial
               color="#00ffcc"
               emissive="#10b981"
-              emissiveIntensity={2.5 * opacity}
+              emissiveIntensity={2.5 * effectiveOpacity}
               toneMapped={false}
               wireframe
               transparent
-              opacity={opacity * 0.85}
+              opacity={effectiveOpacity * 0.85}
             />
           </mesh>
 
@@ -170,7 +176,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
               wireframe
               toneMapped={false}
               transparent
-              opacity={opacity * 0.75}
+              opacity={effectiveOpacity * 0.75}
             />
           </mesh>
           <mesh position={[0, -2.65, 0]}>
@@ -180,7 +186,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
               wireframe
               toneMapped={false}
               transparent
-              opacity={opacity * 0.65}
+              opacity={effectiveOpacity * 0.65}
             />
           </mesh>
         </group>
@@ -191,11 +197,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
           <meshStandardMaterial
             color="#10b981"
             emissive="#059669"
-            emissiveIntensity={3.0 * opacity}
+            emissiveIntensity={3.0 * effectiveOpacity}
             toneMapped={false}
             wireframe
             transparent
-            opacity={opacity * 0.85}
+            opacity={effectiveOpacity * 0.85}
           />
         </mesh>
 
@@ -207,7 +213,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
               new THREE.LineBasicMaterial({
                 color: 0x00ffcc,
                 transparent: true,
-                opacity: opacity * 0.95,
+                opacity: effectiveOpacity * 0.95,
               })
             )
           }
@@ -220,7 +226,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
               new THREE.LineBasicMaterial({
                 color: 0x10b981,
                 transparent: true,
-                opacity: opacity * 0.8,
+                opacity: effectiveOpacity * 0.8,
               })
             )
           }
@@ -232,11 +238,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
           <meshStandardMaterial
             color="#00ffcc"
             emissive="#10b981"
-            emissiveIntensity={3.5 * opacity}
+            emissiveIntensity={3.5 * effectiveOpacity}
             toneMapped={false}
             wireframe
             transparent
-            opacity={opacity * 0.95}
+            opacity={effectiveOpacity * 0.95}
           />
         </mesh>
 
@@ -245,11 +251,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
           <meshStandardMaterial
             color="#10b981"
             emissive="#059669"
-            emissiveIntensity={2.5 * opacity}
+            emissiveIntensity={2.5 * effectiveOpacity}
             toneMapped={false}
             wireframe
             transparent
-            opacity={opacity * 0.85}
+            opacity={effectiveOpacity * 0.85}
           />
         </mesh>
 
@@ -263,7 +269,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
               wireframe
               toneMapped={false}
               transparent
-              opacity={opacity * 0.85}
+              opacity={effectiveOpacity * 0.85}
             />
           </mesh>
 
@@ -273,11 +279,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
             <meshStandardMaterial
               color="#10b981"
               emissive="#059669"
-              emissiveIntensity={3.0 * opacity}
+              emissiveIntensity={3.0 * effectiveOpacity}
               toneMapped={false}
               wireframe
               transparent
-              opacity={opacity * 0.95}
+              opacity={effectiveOpacity * 0.95}
             />
           </mesh>
 
@@ -287,11 +293,11 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
             <meshStandardMaterial
               color="#00ffcc"
               emissive="#10b981"
-              emissiveIntensity={3.0 * opacity}
+              emissiveIntensity={3.0 * effectiveOpacity}
               toneMapped={false}
               wireframe
               transparent
-              opacity={opacity * 0.9}
+              opacity={effectiveOpacity * 0.9}
             />
           </mesh>
         </group>

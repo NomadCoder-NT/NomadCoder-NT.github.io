@@ -15,6 +15,9 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
   const orbitGroupRef = useRef<THREE.Group>(null);
   const coreDieRef = useRef<THREE.Mesh>(null);
 
+  // Enforce visible fallback opacity so the model does not unmount or vanish if scroll calculations lag
+  const effectiveOpacity = Math.max(opacity, 0.85);
+
   // Generate gold edge-pin matrix coordinates around the package perimeter
   const edgePins = useMemo(() => {
     const pins: [number, number, number][] = [];
@@ -35,7 +38,7 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
   }, []);
 
   useFrame((state, delta) => {
-    if (opacity <= 0.0001) return;
+    if (effectiveOpacity <= 0.0001) return;
 
     const time = state.clock.elapsedTime;
 
@@ -55,13 +58,10 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
     if (coreDieRef.current) {
       const mat = coreDieRef.current.material as THREE.MeshStandardMaterial;
       if (mat) {
-        mat.emissiveIntensity = (2.2 + 0.8 * Math.sin(time * 3.5)) * opacity;
+        mat.emissiveIntensity = (2.2 + 0.8 * Math.sin(time * 3.5)) * effectiveOpacity;
       }
     }
   });
-
-  // Early return culling
-  if (opacity <= 0.0001) return null;
 
   return (
     <PresentationControls
@@ -78,6 +78,12 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
         position={[isMobile ? 0 : 1.6, isMobile ? -0.8 : 0, 0]}
         scale={isMobile ? 1.1 : 1.55}
       >
+        {/* Invisible solid interaction box so mouse raycasters register hits effortlessly */}
+        <mesh visible={false}>
+          <boxGeometry args={[4, 2, 4]} />
+          <meshBasicMaterial />
+        </mesh>
+
         {/* Dedicated Point Light for High-Contrast Direct Illumination */}
         <pointLight color="#f59e0b" intensity={6} distance={8} position={[0, 1.5, 2]} />
 
@@ -89,7 +95,7 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
             roughness={0.25}
             metalness={0.85}
             transparent
-            opacity={opacity * 0.95}
+            opacity={effectiveOpacity * 0.95}
           />
         </mesh>
 
@@ -101,7 +107,7 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
             wireframe
             toneMapped={false}
             transparent
-            opacity={opacity * 0.85}
+            opacity={effectiveOpacity * 0.85}
           />
         </mesh>
 
@@ -113,12 +119,12 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
               <meshStandardMaterial
                 color="#f59e0b"
                 emissive="#d97706"
-                emissiveIntensity={1.5 * opacity}
+                emissiveIntensity={1.5 * effectiveOpacity}
                 toneMapped={false}
                 roughness={0.15}
                 metalness={0.95}
                 transparent
-                opacity={opacity * 0.95}
+                opacity={effectiveOpacity * 0.95}
               />
             </mesh>
           ))}
@@ -130,11 +136,11 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
           <meshStandardMaterial
             color="#fbbf24"
             emissive="#f59e0b"
-            emissiveIntensity={3.0 * opacity}
+            emissiveIntensity={3.0 * effectiveOpacity}
             toneMapped={false}
             wireframe
             transparent
-            opacity={opacity * 0.95}
+            opacity={effectiveOpacity * 0.95}
           />
         </mesh>
 
@@ -147,7 +153,7 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
                 color="#fbbf24"
                 toneMapped={false}
                 transparent
-                opacity={opacity * 0.85}
+                opacity={effectiveOpacity * 0.85}
               />
             </mesh>
             <mesh position={[0, 0.22, offset]}>
@@ -156,7 +162,7 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
                 color="#fbbf24"
                 toneMapped={false}
                 transparent
-                opacity={opacity * 0.85}
+                opacity={effectiveOpacity * 0.85}
               />
             </mesh>
           </group>
@@ -170,7 +176,7 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
             wireframe
             toneMapped={false}
             transparent
-            opacity={opacity * 0.7}
+            opacity={effectiveOpacity * 0.7}
             side={THREE.DoubleSide}
           />
         </mesh>
@@ -180,11 +186,11 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
           <meshStandardMaterial
             color="#f59e0b"
             emissive="#d97706"
-            emissiveIntensity={1.5 * opacity}
+            emissiveIntensity={1.5 * effectiveOpacity}
             toneMapped={false}
             wireframe
             transparent
-            opacity={opacity * 0.85}
+            opacity={effectiveOpacity * 0.85}
           />
         </mesh>
 
@@ -203,11 +209,11 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
                   <meshStandardMaterial
                     color="#fbbf24"
                     emissive="#f59e0b"
-                    emissiveIntensity={1.8 * opacity}
+                    emissiveIntensity={1.8 * effectiveOpacity}
                     toneMapped={false}
                     wireframe
                     transparent
-                    opacity={opacity * 0.85}
+                    opacity={effectiveOpacity * 0.85}
                   />
                 </mesh>
 
@@ -218,7 +224,7 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
                     color="#f59e0b"
                     toneMapped={false}
                     transparent
-                    opacity={opacity * 0.9}
+                    opacity={effectiveOpacity * 0.9}
                   />
                 </mesh>
               </group>

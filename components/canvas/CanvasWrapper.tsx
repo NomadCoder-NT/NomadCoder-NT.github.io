@@ -137,7 +137,7 @@ export function CanvasWrapper({
   }
 
   return (
-    <div className="fixed inset-0 z-10 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
       <Canvas
         className="w-full h-full pointer-events-auto"
         camera={{ position: [0, 0, 5], fov: 45, near: 0.1, far: 100 }}
@@ -148,8 +148,8 @@ export function CanvasWrapper({
           preserveDrawingBuffer: false,
         }}
         eventSource={
-          typeof document !== 'undefined'
-            ? ((document.getElementById('__next') || document.body) as HTMLElement)
+          typeof window !== 'undefined'
+            ? (document.body as HTMLElement)
             : undefined
         }
         dpr={isMobile ? [1, 1.5] : [1, 2]}
