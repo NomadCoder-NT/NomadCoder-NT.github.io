@@ -228,7 +228,7 @@ export function StoryScene({
       (scrollProgress > 0.7 ? -0.4 : 0);
     const targetY =
       -state.pointer.y * (isMobile ? 0.2 : 0.5) - scrollProgress * 1.5;
-    const targetZ = 6.5 - Math.sin(scrollProgress * Math.PI) * 1.5;
+    const targetZ = 5.0 - Math.sin(scrollProgress * Math.PI) * 0.8;
 
     state.camera.position.x = THREE.MathUtils.lerp(
       state.camera.position.x,
@@ -249,18 +249,18 @@ export function StoryScene({
 
     // Smoothly interpolate ambient, spotlight, and scene fog colors towards the active season's background palette
     if (ambientLightRef.current) {
-      ambientLightRef.current.color.lerp(targetAmbient, 0.06);
+      ambientLightRef.current.color.lerp(targetAmbient, 0.08);
     }
     if (spotLightRef.current) {
-      spotLightRef.current.target.position.set(isMobile ? 0 : 2.8, -0.2, -1);
+      spotLightRef.current.target.position.set(isMobile ? 0 : 1.6, 0, 0);
       spotLightRef.current.target.updateMatrixWorld();
       spotLightRef.current.color.lerp(targetSpot, 0.08);
     }
     if (fogRef.current) {
-      fogRef.current.color.lerp(targetFog, 0.06);
+      fogRef.current.color.lerp(targetFog, 0.08);
     }
     if (state.scene.fog && state.scene.fog instanceof THREE.Fog) {
-      state.scene.fog.color.lerp(targetFog, 0.06);
+      state.scene.fog.color.lerp(targetFog, 0.08);
     }
   });
 

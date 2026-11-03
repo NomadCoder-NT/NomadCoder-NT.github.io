@@ -125,12 +125,12 @@ export function NarrativeSection({
       {/* Asymmetric Editorial Layout Container */}
       <motion.div
         style={{ y: parallaxY, opacity: opacityFade }}
-        className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16 relative z-10 pointer-events-auto"
+        className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16 relative z-10 pointer-events-none"
       >
         {/* ========================================================================= */}
         {/* LEFT COLUMN (w-full lg:w-[45%]): DEDICATED EDITORIAL DOSSIER             */}
         {/* ========================================================================= */}
-        <div className="w-full lg:w-[45%] space-y-7">
+        <div className="w-full lg:w-[45%] space-y-7 pointer-events-auto">
           {/* Monospace Kicker */}
           <div className="flex items-center gap-2.5 text-xs font-mono tracking-widest uppercase font-semibold">
             <span className={`w-2 h-2 rounded-full ${seasonPulseDot}`} />
@@ -426,34 +426,43 @@ export function NarrativeSection({
         {/* ========================================================================= */}
         {/* RIGHT COLUMN (w-full lg:w-[55%]): OPEN, UNOBSTRUCTED 3D VIEWPORT         */}
         {/* ========================================================================= */}
-        <div className="w-full lg:w-[55%] hidden lg:flex flex-col justify-center items-end min-h-[460px] pointer-events-none">
-          {/* Subtle Technical HUD Telemetry Overlay on the open right side */}
-          {section.id === 'ignition' && (
-            <div className="p-3.5 rounded border border-amber-500/20 bg-neutral-950/30 backdrop-blur-xs font-mono text-[11px] text-neutral-400 space-y-1 text-right">
-              <div className="text-[#e08a3c] font-semibold tracking-wider">
-                // SILICON MONOLITHIC DIE MODEL
-              </div>
-              <div>SUBSTRATE: POWEREDGE SERVER ARCHITECTURE</div>
-              <div>CLOCK RATE: ACTIVE PULSE ORBITAL DYNAMICS</div>
-              <div className="text-neutral-500 text-[10px] pt-1">
-                INTERACTIVE 3D VIEWPORT // USE MOUSE TO INSPECT
-              </div>
+        <div className="w-full lg:w-[55%] hidden lg:flex flex-col justify-between items-end min-h-[460px] pointer-events-none select-none">
+          {/* Interactive Inspection Instruction Badge */}
+          {(section.id === 'ignition' || section.id === 'roots-structure') && (
+            <div className="text-[10px] font-mono tracking-widest text-emerald-400/80 uppercase pointer-events-none select-none pb-2">
+              // DRAG TO ROTATE 3D GEOMETRY [360°]
             </div>
           )}
 
-          {section.id === 'roots-structure' && (
-            <div className="p-3.5 rounded border border-emerald-500/20 bg-neutral-950/30 backdrop-blur-xs font-mono text-[11px] text-neutral-400 space-y-1 text-right">
-              <div className="text-[#34d399] font-semibold tracking-wider">
-                // MUKTESHVARA TORANA ARCH 3D CAD
+          <div className="mt-auto">
+            {/* Subtle Technical HUD Telemetry Overlay on the open right side */}
+            {section.id === 'ignition' && (
+              <div className="p-3.5 rounded border border-amber-500/20 bg-neutral-950/30 backdrop-blur-xs font-mono text-[11px] text-neutral-400 space-y-1 text-right">
+                <div className="text-[#e08a3c] font-semibold tracking-wider">
+                  // SILICON MONOLITHIC DIE MODEL
+                </div>
+                <div>SUBSTRATE: POWEREDGE SERVER ARCHITECTURE</div>
+                <div>CLOCK RATE: ACTIVE PULSE ORBITAL DYNAMICS</div>
+                <div className="text-neutral-500 text-[10px] pt-1">
+                  INTERACTIVE 3D VIEWPORT // USE MOUSE TO INSPECT
+                </div>
               </div>
-              <div>MESH DENSITY: 1,240,000 SCULPTED POLYGONS</div>
-              <div>FABRICATION: ±0.15MM COREXY + MSLA 12K</div>
-              <div>METALLURGY: 325-MESH ATOMIZED BRONZE</div>
-              <div className="text-neutral-500 text-[10px] pt-1">
-                INTERACTIVE 3D VIEWPORT // USE MOUSE TO INSPECT
+            )}
+
+            {section.id === 'roots-structure' && (
+              <div className="p-3.5 rounded border border-emerald-500/20 bg-neutral-950/30 backdrop-blur-xs font-mono text-[11px] text-neutral-400 space-y-1 text-right">
+                <div className="text-[#34d399] font-semibold tracking-wider">
+                  // MUKTESHVARA TORANA ARCH 3D CAD
+                </div>
+                <div>MESH DENSITY: 1,240,000 SCULPTED POLYGONS</div>
+                <div>FABRICATION: ±0.15MM COREXY + MSLA 12K</div>
+                <div>METALLURGY: 325-MESH ATOMIZED BRONZE</div>
+                <div className="text-neutral-500 text-[10px] pt-1">
+                  INTERACTIVE 3D VIEWPORT // USE MOUSE TO INSPECT
+                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </motion.div>
 

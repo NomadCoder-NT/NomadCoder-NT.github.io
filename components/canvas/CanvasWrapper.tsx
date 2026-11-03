@@ -137,16 +137,36 @@ export function CanvasWrapper({
   }
 
   return (
-    <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
+    <div className="fixed inset-0 z-0 pointer-events-none">
       <Canvas
-        className="pointer-events-auto"
-        camera={{ position: [0, 0, 6.5], fov: isMobile ? 65 : 50 }}
+        className="w-full h-full pointer-events-auto"
+        camera={{ position: [0, 0, 5], fov: 45, near: 0.1, far: 100 }}
         gl={{
-          antialias: !isMobile,
-          powerPreference: 'high-performance',
           alpha: true,
+          antialias: true,
+          powerPreference: 'high-performance',
+          preserveDrawingBuffer: false,
         }}
         dpr={isMobile ? [1, 1.5] : [1, 2]}
+        onCreated={({ gl }) => {
+          const debugExt = gl.getContext().getExtension('WEBGL_debug_renderer_info');
+          const rendererStr = debugExt
+            ? gl.getContext().getParameter(debugExt.UNMASKED_RENDERER_WEBGL)
+            : (gl.capabilities as { isWebGL2?: boolean }).isWebGL2
+            ? 'WebGL 2.0'
+            : 'WebGL 1.0';
+          console.log('[WebGL] Context initialized:', rendererStr);
+          const canvasEl = gl.domElement;
+          const handleContextLost = (e: Event) => {
+            e.preventDefault();
+            console.error('[WebGL] Context Lost:', e);
+          };
+          const handleContextRestored = () => {
+            console.log('[WebGL] Context Restored');
+          };
+          canvasEl.addEventListener('webglcontextlost', handleContextLost);
+          canvasEl.addEventListener('webglcontextrestored', handleContextRestored);
+        }}
       >
         <StoryScene
           scrollProgress={scrollProgress}

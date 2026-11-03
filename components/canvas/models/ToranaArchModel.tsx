@@ -2,6 +2,7 @@
 
 import React, { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import { PresentationControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface ToranaArchModelProps {
@@ -37,13 +38,13 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
   }, []);
 
   useFrame((state) => {
-    if (opacity <= 0.01) return;
+    if (opacity <= 0.001) return;
 
     const time = state.clock.elapsedTime;
 
     // Subtle levitation and gentle yaw rotation
     if (archGroupRef.current) {
-      archGroupRef.current.position.y = Math.sin(time * 0.8) * 0.12 - 0.2;
+      archGroupRef.current.position.y = (isMobile ? -0.8 : -0.2) + Math.sin(time * 0.8) * 0.12;
       archGroupRef.current.rotation.y = Math.sin(time * 0.4) * 0.22;
     }
 
@@ -51,222 +52,255 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
     if (kalasaRef.current) {
       const mat = kalasaRef.current.material as THREE.MeshStandardMaterial;
       if (mat) {
-        mat.emissiveIntensity = (1.15 + 0.35 * Math.sin(time * 2.8)) * opacity;
+        mat.emissiveIntensity = (2.2 + 0.8 * Math.sin(time * 2.8)) * opacity;
       }
     }
   });
 
   // Early return culling
-  if (opacity <= 0.01) return null;
+  if (opacity <= 0.001) return null;
 
   return (
-    <group
-      ref={archGroupRef}
-      position={[isMobile ? 0 : 2.8, -0.3, -1.2]}
-      scale={isMobile ? [1.25, 1.25, 1.25] : [1.7, 1.7, 1.7]}
+    <PresentationControls
+      global={false}
+      cursor={true}
+      snap
+      speed={1.5}
+      polar={[-Math.PI / 6, Math.PI / 6]}
+      azimuth={[-Math.PI, Math.PI]}
     >
-      {/* 1. Dual Cylinder Pillars with Capital Brackets */}
-      {/* Left Pillar */}
-      <group position={[-1.8, 0, 0]}>
-        {/* Pillar Shaft */}
-        <mesh position={[0, -0.6, 0]}>
-          <cylinderGeometry args={[0.18, 0.22, 3.6, 24]} />
-          <meshStandardMaterial
-            color="#10b981"
-            emissive="#065f46"
-            emissiveIntensity={0.95 * opacity}
-            wireframe
-            transparent
-            opacity={opacity * 0.85}
-          />
-        </mesh>
+      <group
+        ref={archGroupRef}
+        position={[isMobile ? 0 : 1.6, isMobile ? -0.8 : -0.2, 0]}
+        scale={isMobile ? 1.0 : 1.65}
+      >
+        {/* Dedicated Point Light for Cyber Emerald & Cyan Glow */}
+        <pointLight color="#10b981" intensity={7} distance={10} position={[0, 2, 2.5]} />
 
-        {/* Pillar Capital Bracket */}
+        {/* 1. Dual Cylinder Pillars with Capital Brackets */}
+        {/* Left Pillar */}
+        <group position={[-1.8, 0, 0]}>
+          {/* Pillar Shaft */}
+          <mesh position={[0, -0.6, 0]}>
+            <cylinderGeometry args={[0.18, 0.22, 3.6, 24]} />
+            <meshStandardMaterial
+              color="#00ffcc"
+              emissive="#10b981"
+              emissiveIntensity={3.5 * opacity}
+              toneMapped={false}
+              wireframe
+              transparent
+              opacity={opacity * 0.9}
+            />
+          </mesh>
+
+          {/* Pillar Capital Bracket */}
+          <mesh position={[0, 1.2, 0]}>
+            <boxGeometry args={[0.55, 0.16, 0.55]} />
+            <meshStandardMaterial
+              color="#00ffcc"
+              emissive="#10b981"
+              emissiveIntensity={2.5 * opacity}
+              toneMapped={false}
+              wireframe
+              transparent
+              opacity={opacity * 0.85}
+            />
+          </mesh>
+
+          {/* Multi-Tiered Pedestal Base */}
+          <mesh position={[0, -2.4, 0]}>
+            <boxGeometry args={[0.7, 0.4, 0.7]} />
+            <meshBasicMaterial
+              color="#00ffcc"
+              wireframe
+              toneMapped={false}
+              transparent
+              opacity={opacity * 0.75}
+            />
+          </mesh>
+          <mesh position={[0, -2.65, 0]}>
+            <boxGeometry args={[0.9, 0.16, 0.9]} />
+            <meshBasicMaterial
+              color="#10b981"
+              wireframe
+              toneMapped={false}
+              transparent
+              opacity={opacity * 0.65}
+            />
+          </mesh>
+        </group>
+
+        {/* Right Pillar */}
+        <group position={[1.8, 0, 0]}>
+          {/* Pillar Shaft */}
+          <mesh position={[0, -0.6, 0]}>
+            <cylinderGeometry args={[0.18, 0.22, 3.6, 24]} />
+            <meshStandardMaterial
+              color="#00ffcc"
+              emissive="#10b981"
+              emissiveIntensity={3.5 * opacity}
+              toneMapped={false}
+              wireframe
+              transparent
+              opacity={opacity * 0.9}
+            />
+          </mesh>
+
+          {/* Pillar Capital Bracket */}
+          <mesh position={[0, 1.2, 0]}>
+            <boxGeometry args={[0.55, 0.16, 0.55]} />
+            <meshStandardMaterial
+              color="#00ffcc"
+              emissive="#10b981"
+              emissiveIntensity={2.5 * opacity}
+              toneMapped={false}
+              wireframe
+              transparent
+              opacity={opacity * 0.85}
+            />
+          </mesh>
+
+          {/* Multi-Tiered Pedestal Base */}
+          <mesh position={[0, -2.4, 0]}>
+            <boxGeometry args={[0.7, 0.4, 0.7]} />
+            <meshBasicMaterial
+              color="#00ffcc"
+              wireframe
+              toneMapped={false}
+              transparent
+              opacity={opacity * 0.75}
+            />
+          </mesh>
+          <mesh position={[0, -2.65, 0]}>
+            <boxGeometry args={[0.9, 0.16, 0.9]} />
+            <meshBasicMaterial
+              color="#10b981"
+              wireframe
+              toneMapped={false}
+              transparent
+              opacity={opacity * 0.65}
+            />
+          </mesh>
+        </group>
+
+        {/* 2. Horizontal Lintel Transom Connector (Crossbeam) */}
         <mesh position={[0, 1.2, 0]}>
-          <boxGeometry args={[0.55, 0.16, 0.55]} />
-          <meshStandardMaterial
-            color="#06b6d4"
-            wireframe
-            transparent
-            opacity={opacity * 0.75}
-          />
-        </mesh>
-
-        {/* Multi-Tiered Pedestal Base */}
-        <mesh position={[0, -2.4, 0]}>
-          <boxGeometry args={[0.7, 0.4, 0.7]} />
-          <meshBasicMaterial
-            color="#06b6d4"
-            wireframe
-            transparent
-            opacity={opacity * 0.65}
-          />
-        </mesh>
-        <mesh position={[0, -2.65, 0]}>
-          <boxGeometry args={[0.9, 0.16, 0.9]} />
-          <meshBasicMaterial
-            color="#10b981"
-            wireframe
-            transparent
-            opacity={opacity * 0.55}
-          />
-        </mesh>
-      </group>
-
-      {/* Right Pillar */}
-      <group position={[1.8, 0, 0]}>
-        {/* Pillar Shaft */}
-        <mesh position={[0, -0.6, 0]}>
-          <cylinderGeometry args={[0.18, 0.22, 3.6, 24]} />
-          <meshStandardMaterial
-            color="#10b981"
-            emissive="#065f46"
-            emissiveIntensity={0.95 * opacity}
-            wireframe
-            transparent
-            opacity={opacity * 0.85}
-          />
-        </mesh>
-
-        {/* Pillar Capital Bracket */}
-        <mesh position={[0, 1.2, 0]}>
-          <boxGeometry args={[0.55, 0.16, 0.55]} />
-          <meshStandardMaterial
-            color="#06b6d4"
-            wireframe
-            transparent
-            opacity={opacity * 0.75}
-          />
-        </mesh>
-
-        {/* Multi-Tiered Pedestal Base */}
-        <mesh position={[0, -2.4, 0]}>
-          <boxGeometry args={[0.7, 0.4, 0.7]} />
-          <meshBasicMaterial
-            color="#06b6d4"
-            wireframe
-            transparent
-            opacity={opacity * 0.65}
-          />
-        </mesh>
-        <mesh position={[0, -2.65, 0]}>
-          <boxGeometry args={[0.9, 0.16, 0.9]} />
-          <meshBasicMaterial
-            color="#10b981"
-            wireframe
-            transparent
-            opacity={opacity * 0.55}
-          />
-        </mesh>
-      </group>
-
-      {/* 2. Horizontal Lintel Transom Connector */}
-      <mesh position={[0, 1.2, 0]}>
-        <boxGeometry args={[3.8, 0.14, 0.3]} />
-        <meshStandardMaterial
-          color="#06b6d4"
-          wireframe
-          transparent
-          opacity={opacity * 0.75}
-        />
-      </mesh>
-
-      {/* 3. Smooth Parametric Semicircular Arch Outlines */}
-      <primitive
-        object={
-          new THREE.Line(
-            archCurveGeometry,
-            new THREE.LineBasicMaterial({
-              color: 0x06b6d4,
-              transparent: true,
-              opacity: opacity * 0.9,
-            })
-          )
-        }
-      />
-
-      <primitive
-        object={
-          new THREE.Line(
-            innerCurveGeometry,
-            new THREE.LineBasicMaterial({
-              color: 0x10b981,
-              transparent: true,
-              opacity: opacity * 0.65,
-            })
-          )
-        }
-      />
-
-      {/* 4. Concentric Torus Decoration (Signature Mukteshvara Makara Arch Torus) */}
-      <mesh position={[0, 1.2, 0]}>
-        <torusGeometry args={[1.8, 0.08, 14, 48, Math.PI]} />
-        <meshStandardMaterial
-          color="#06b6d4"
-          emissive="#0891b2"
-          emissiveIntensity={1.15 * opacity}
-          wireframe
-          transparent
-          opacity={opacity * 0.9}
-        />
-      </mesh>
-
-      <mesh position={[0, 1.2, 0]}>
-        <torusGeometry args={[1.52, 0.045, 12, 40, Math.PI]} />
-        <meshBasicMaterial
-          color="#10b981"
-          wireframe
-          transparent
-          opacity={opacity * 0.75}
-        />
-      </mesh>
-
-      {/* 5. Sacred Kalasa Crest Finial crowning the apex */}
-      <group position={[0, 3.15, 0]}>
-        {/* Urn Base Ring */}
-        <mesh position={[0, -0.15, 0]}>
-          <cylinderGeometry args={[0.26, 0.32, 0.12, 16]} />
-          <meshBasicMaterial
-            color="#06b6d4"
-            wireframe
-            transparent
-            opacity={opacity * 0.85}
-          />
-        </mesh>
-
-        {/* Central Kalasa Octahedron */}
-        <mesh ref={kalasaRef}>
-          <octahedronGeometry args={[0.42, 1]} />
+          <boxGeometry args={[3.8, 0.14, 0.3]} />
           <meshStandardMaterial
             color="#10b981"
             emissive="#059669"
-            emissiveIntensity={1.15 * opacity}
+            emissiveIntensity={3.0 * opacity}
+            toneMapped={false}
+            wireframe
+            transparent
+            opacity={opacity * 0.85}
+          />
+        </mesh>
+
+        {/* 3. Smooth Parametric Semicircular Arch Outlines */}
+        <primitive
+          object={
+            new THREE.Line(
+              archCurveGeometry,
+              new THREE.LineBasicMaterial({
+                color: 0x00ffcc,
+                transparent: true,
+                opacity: opacity * 0.95,
+              })
+            )
+          }
+        />
+
+        <primitive
+          object={
+            new THREE.Line(
+              innerCurveGeometry,
+              new THREE.LineBasicMaterial({
+                color: 0x10b981,
+                transparent: true,
+                opacity: opacity * 0.8,
+              })
+            )
+          }
+        />
+
+        {/* 4. Concentric Torus Decoration (Signature Mukteshvara Makara Arch Torus) */}
+        <mesh position={[0, 1.2, 0]}>
+          <torusGeometry args={[1.8, 0.08, 14, 48, Math.PI]} />
+          <meshStandardMaterial
+            color="#00ffcc"
+            emissive="#10b981"
+            emissiveIntensity={3.5 * opacity}
+            toneMapped={false}
             wireframe
             transparent
             opacity={opacity * 0.95}
           />
         </mesh>
 
-        {/* Spire Needle Apex */}
-        <mesh position={[0, 0.42, 0]}>
-          <coneGeometry args={[0.12, 0.45, 12]} />
+        <mesh position={[0, 1.2, 0]}>
+          <torusGeometry args={[1.52, 0.045, 12, 40, Math.PI]} />
           <meshStandardMaterial
-            color="#06b6d4"
-            emissive="#0891b2"
-            emissiveIntensity={0.95 * opacity}
+            color="#10b981"
+            emissive="#059669"
+            emissiveIntensity={2.5 * opacity}
+            toneMapped={false}
             wireframe
             transparent
-            opacity={opacity * 0.9}
+            opacity={opacity * 0.85}
           />
         </mesh>
-      </group>
 
-      {/* 6. Emerald Projection Ground Grid */}
-      <gridHelper
-        args={[16, 24, '#10b981', '#022c22']}
-        position={[0, -3.2, 0]}
-      />
-    </group>
+        {/* 5. Sacred Kalasa Crest Finial crowning the apex */}
+        <group position={[0, 3.15, 0]}>
+          {/* Urn Base Ring */}
+          <mesh position={[0, -0.15, 0]}>
+            <cylinderGeometry args={[0.26, 0.32, 0.12, 16]} />
+            <meshBasicMaterial
+              color="#00ffcc"
+              wireframe
+              toneMapped={false}
+              transparent
+              opacity={opacity * 0.85}
+            />
+          </mesh>
+
+          {/* Central Kalasa Octahedron */}
+          <mesh ref={kalasaRef}>
+            <octahedronGeometry args={[0.42, 1]} />
+            <meshStandardMaterial
+              color="#10b981"
+              emissive="#059669"
+              emissiveIntensity={3.0 * opacity}
+              toneMapped={false}
+              wireframe
+              transparent
+              opacity={opacity * 0.95}
+            />
+          </mesh>
+
+          {/* Spire Needle Apex */}
+          <mesh position={[0, 0.42, 0]}>
+            <coneGeometry args={[0.12, 0.45, 12]} />
+            <meshStandardMaterial
+              color="#00ffcc"
+              emissive="#10b981"
+              emissiveIntensity={3.0 * opacity}
+              toneMapped={false}
+              wireframe
+              transparent
+              opacity={opacity * 0.9}
+            />
+          </mesh>
+        </group>
+
+        {/* 6. Emerald Projection Ground Grid */}
+        <gridHelper
+          args={[16, 24, '#00ffcc', '#022c22']}
+          position={[0, -3.2, 0]}
+        />
+      </group>
+    </PresentationControls>
   );
 }
-
