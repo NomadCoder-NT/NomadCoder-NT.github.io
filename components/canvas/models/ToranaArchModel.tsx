@@ -47,7 +47,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
 
     // Subtle levitation and gentle yaw rotation
     if (archGroupRef.current) {
-      archGroupRef.current.position.y = (isMobile ? -0.8 : -0.2) + Math.sin(time * 0.8) * 0.12;
+      archGroupRef.current.position.y = (isMobile ? -0.6 : -0.2) + Math.sin(time * 0.8) * 0.12;
       archGroupRef.current.rotation.y = Math.sin(time * 0.4) * 0.22;
     }
 
@@ -72,8 +72,8 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
     >
       <group
         ref={archGroupRef}
-        position={[isMobile ? 0 : 1.6, isMobile ? -0.8 : -0.2, 0]}
-        scale={isMobile ? 1.0 : 1.65}
+        position={[isMobile ? 0 : 1.6, isMobile ? -0.6 : -0.2, 0]}
+        scale={isMobile ? 1.0 : 1.6}
       >
         {/* Invisible solid interaction cylinder so mouse raycasters register hits effortlessly */}
         <mesh visible={false}>
@@ -82,7 +82,7 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
         </mesh>
 
         {/* Dedicated Point Light for Cyber Emerald & Cyan Glow */}
-        <pointLight color="#10b981" intensity={7} distance={10} position={[0, 2, 2.5]} />
+        <pointLight color="#10b981" intensity={8} distance={10} position={[0, 2, 2.5]} />
 
         {/* 1. Dual Cylinder Pillars with Capital Brackets */}
         {/* Left Pillar */}

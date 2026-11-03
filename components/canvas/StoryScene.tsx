@@ -8,6 +8,7 @@ import { MonsoonRainScene } from './MonsoonRainScene';
 import { AutumnYieldScene } from './AutumnYieldScene';
 import { DigitalSpringScene } from './DigitalSpringScene';
 import { WinterFrostScene } from './WinterFrostScene';
+import { ToranaArchModel } from './models/ToranaArchModel';
 import { AtmosphericPostProcessing } from './AtmosphericPostProcessing';
 import { getRealCurrentSeason, RealSeasonId } from '@/lib/real-seasons';
 
@@ -264,6 +265,10 @@ export function StoryScene({
     }
   });
 
+  // Ensure springOpacity evaluates to 1.0 when activeSection is 5 (0-indexed for chapter 6) or when scrolling past Chapter 06
+  const isChapter06 = activeSectionIdx === 5 || activeSectionIdx === 6;
+  const toranaOpacity = isChapter06 ? 1.0 : (opacities.spring ?? 0);
+
   // Enforce minimum fallback opacity so 3D models do not vanish when scroll calculations lag
   const summerOpacity =
     activeSectionIdx <= 1 ? Math.max(opacities.summer, 0.9) : opacities.summer;
@@ -317,6 +322,12 @@ export function StoryScene({
           densityFactor={densityFactor}
         />
       )}
+
+      {/* 3D Mukteshvara Torana Heritage Architectural Model mounted directly for Chapter 06 */}
+      {toranaOpacity > 0.01 && (
+        <ToranaArchModel opacity={toranaOpacity} isMobile={isMobile} />
+      )}
+
       {opacities.winter > 0.01 && (
         <WinterFrostScene
           opacity={opacities.winter}

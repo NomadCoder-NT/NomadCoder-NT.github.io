@@ -4,7 +4,6 @@ import React, { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { seededRandom } from '@/lib/math';
-import { ToranaArchModel } from './models/ToranaArchModel';
 
 interface DigitalSpringProps {
   opacity: number;
@@ -189,9 +188,6 @@ export function DigitalSpringScene({ opacity, isMobile, densityFactor = 1 }: Dig
           }
         />
       </group>
-
-      {/* Mukteshvara Torana Heritage Architectural Wireframe Model */}
-      <ToranaArchModel opacity={opacity} isMobile={isMobile} />
     </group>
   );
 }
