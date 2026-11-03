@@ -65,8 +65,8 @@ export function ServerDieModel({ opacity, isMobile }: ServerDieModelProps) {
   return (
     <group
       ref={dieGroupRef}
-      position={[isMobile ? 0 : 2.7, 0, -1.6]}
-      scale={isMobile ? [1.2, 1.2, 1.2] : [1.5, 1.5, 1.5]}
+      position={[isMobile ? 0 : 2.5, 0, -1.2]}
+      scale={isMobile ? [1.25, 1.25, 1.25] : [1.65, 1.65, 1.65]}
     >
       {/* 1. Dark Substrate Base Package */}
       <mesh position={[0, -0.05, 0]}>

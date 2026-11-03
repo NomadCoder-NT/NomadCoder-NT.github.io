@@ -15,29 +15,29 @@ export type SeasonMode = 'story' | 'live' | RealSeasonId;
 
 export const SEASON_PALETTES = {
   summer: {
-    ambient: '#92400e', // warm amber
-    spot: '#f59e0b',    // glowing amber
-    fog: '#020408',     // pure obsidian #020408
+    ambient: '#5c3210', // warm amber ambient
+    spot: '#e08a3c',    // season accent (#e08a3c)
+    fog: '#070503',     // season bg-primary (#070503)
   },
   monsoon: {
-    ambient: '#0369a1', // deep storm blue
-    spot: '#00f0ff',    // electric cyan
-    fog: '#020408',     // pure obsidian #020408
+    ambient: '#0b314a', // deep storm blue ambient
+    spot: '#38bdf8',    // season accent (#38bdf8)
+    fog: '#020509',     // season bg-primary (#020509)
   },
   autumn: {
-    ambient: '#854d0e', // harvest bronze
-    spot: '#eab308',    // radiant gold
-    fog: '#020408',     // pure obsidian #020408
+    ambient: '#4a3b0e', // harvest bronze ambient
+    spot: '#d4af37',    // season accent (#d4af37)
+    fog: '#050402',     // season bg-primary (#050402)
   },
   spring: {
-    ambient: '#065f46', // emerald forest
-    spot: '#10b981',    // vibrant emerald
-    fog: '#020408',     // pure obsidian #020408
+    ambient: '#0d3d29', // emerald forest ambient
+    spot: '#34d399',    // season accent (#34d399)
+    fog: '#020604',     // season bg-primary (#020604)
   },
   winter: {
-    ambient: '#075985', // deep frost blue
-    spot: '#38bdf8',    // crisp ice blue
-    fog: '#020408',     // pure obsidian #020408
+    ambient: '#132847', // deep frost blue ambient
+    spot: '#93c5fd',    // season accent (#93c5fd)
+    fog: '#03050a',     // season bg-primary (#03050a)
   },
 } as const;
 
@@ -280,7 +280,7 @@ export function StoryScene({
       />
 
       {/* Atmospheric Fog smoothly modulated by active season's background color */}
-      <fog ref={fogRef} attach="fog" args={['#020408', 5, 24]} />
+      <fog ref={fogRef} attach="fog" args={['#070503', 5, 24]} />
 
       {/* Strict conditional unmounting (opacities[season] > 0.01) to lock 60 FPS */}
       {opacities.summer > 0.01 && (

@@ -1,8 +1,9 @@
 node_modules/
 .next/
 out/
+.env*.local
+.env*
+!.env.example
 coverage/
 .DS_Store
 *.log
-.env*
-!.env.example

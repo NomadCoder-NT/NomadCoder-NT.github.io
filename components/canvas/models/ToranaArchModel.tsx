@@ -62,8 +62,8 @@ export function ToranaArchModel({ opacity, isMobile }: ToranaArchModelProps) {
   return (
     <group
       ref={archGroupRef}
-      position={[isMobile ? 0 : 2.8, -0.2, -1.5]}
-      scale={isMobile ? [1.2, 1.2, 1.2] : [1.55, 1.55, 1.55]}
+      position={[isMobile ? 0 : 2.5, -0.3, -1.2]}
+      scale={isMobile ? [1.25, 1.25, 1.25] : [1.7, 1.7, 1.7]}
     >
       {/* 1. Dual Cylinder Pillars with Capital Brackets */}
       {/* Left Pillar */}
