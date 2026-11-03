@@ -194,18 +194,6 @@ export default function Home() {
 
         {/* Narrative Story Sections 01 through 07 */}
         <div className="relative z-10">
-          {/* Glowing vertical lifecycle flow spine pulsing in sync with global scroll */}
-          <div
-            className="absolute left-1/2 -translate-x-1/2 top-32 bottom-32 w-[1px] bg-gradient-to-b from-amber-500/20 via-cyan-500/25 via-yellow-500/25 via-emerald-500/25 to-sky-500/25 pointer-events-none -z-10 hidden sm:block"
-            aria-hidden="true"
-          >
-            <div
-              style={{
-                top: `${Math.min(96, Math.max(2, scrollProgress * 100))}%`,
-              }}
-              className="absolute left-1/2 -translate-x-1/2 w-3.5 h-24 -mt-12 bg-gradient-to-b from-amber-400/0 via-amber-300/40 to-emerald-400/0 blur-[2px] rounded-full transition-all duration-300 pointer-events-none"
-            />
-          </div>
 
           {NARRATIVE_SECTIONS.map((section, idx) => (
             <React.Fragment key={section.id}>

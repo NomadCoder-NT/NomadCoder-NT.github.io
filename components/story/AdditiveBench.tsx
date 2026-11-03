@@ -211,8 +211,8 @@ export function AdditiveBench() {
 
   return (
     <section className="py-24 px-4 md:px-12 relative overflow-hidden flex items-center justify-center">
-      {/* Container Card in bbsrguy.github.io Obsidian Glass Styling */}
-      <div className="w-full max-w-5xl rounded-2xl bg-[#090d16]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_rgba(0,0,0,0.85)] p-6 sm:p-10 relative overflow-hidden">
+      {/* Container in Clean Obsidian Editorial Styling */}
+      <div className="w-full max-w-5xl rounded-xl bg-white/[0.01] border border-white/[0.08] p-6 sm:p-10 relative overflow-hidden">
         {/* Subtle Accent Glow Ring in Current Stage Hue */}
         <div
           className={`absolute -top-24 -right-24 w-96 h-96 rounded-full blur-3xl pointer-events-none opacity-20 transition-colors duration-500 ${currentStage.accentBg}`}

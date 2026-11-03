@@ -165,9 +165,9 @@ export function CanvasWrapper({
         />
       </Canvas>
 
-      {/* Atmospheric Vignette & Dynamic Seasonal Color Scrim Wash: open on right side for 3D models */}
-      <div className={`absolute inset-0 bg-gradient-to-b ${ambientGlowClass} transition-colors duration-700 pointer-events-none opacity-50`} />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,_var(--tw-gradient-stops))] from-transparent via-neutral-950/25 to-neutral-950/75 pointer-events-none" />
+      {/* Atmospheric Vignette & Dynamic Seasonal Color Scrim Wash: seamless on pure obsidian #020408 */}
+      <div className={`absolute inset-0 bg-gradient-to-b ${ambientGlowClass} transition-colors duration-700 pointer-events-none opacity-40`} />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_35%_50%,_var(--tw-gradient-stops))] from-transparent via-[#020408]/20 to-[#020408]/85 pointer-events-none" />
     </div>
   );
 }

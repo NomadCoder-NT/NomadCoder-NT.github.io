@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { ArrowDown, Terminal, Compass } from 'lucide-react';
+import { ArrowDown, Terminal } from 'lucide-react';
 
 interface StoryHeroProps {
   onBeginJourney: () => void;
@@ -16,94 +16,76 @@ export function StoryHero({ onBeginJourney, onOpenTerminal }: StoryHeroProps) {
     offset: ['start start', 'end start'],
   });
 
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const opacityFade = useTransform(scrollYProgress, [0, 0.75], [1, 0.2]);
 
   return (
     <section
       ref={heroRef}
-      className="min-h-screen flex flex-col justify-center items-center text-center px-4 md:px-12 relative pt-20 pb-16 overflow-hidden"
+      className="min-h-screen flex flex-col justify-center items-center text-center px-4 sm:px-8 md:px-12 relative pt-24 pb-16 overflow-hidden"
     >
       <motion.div
         style={{ y: parallaxY, opacity: opacityFade }}
-        className="max-w-4xl mx-auto space-y-6"
+        className="max-w-4xl mx-auto space-y-8"
       >
-        {/* Editorial Subtitle Kicker */}
+        {/* Monospace Kicker */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-wrap items-center justify-center gap-2 text-xs md:text-sm font-mono tracking-widest text-amber-400 font-semibold uppercase"
+          className="text-xs sm:text-sm font-mono tracking-widest text-neutral-400 uppercase font-medium"
         >
-          <span>NEERAJ THAMBA // FOUNDER & SYSTEMS STRATEGIST</span>
+          <span>NEERAJ THAMBA · FOUNDER & CREATIVE TECHNOLOGIST</span>
         </motion.div>
 
-        {/* Primary Headline: High-Contrast Editorial Typography */}
+        {/* Clean, Confident Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight text-white max-w-5xl leading-[1.05] sm:leading-[1.0] text-balance"
+          className="text-3xl sm:text-5xl md:text-6xl font-medium tracking-tight text-white leading-[1.18] sm:leading-[1.15] text-balance max-w-4xl mx-auto font-sans"
         >
-          Systems, Capital & Physical Form.
+          Eight years across edge compute, algorithmic adtech auctions, wealth stewardship, and sub-millimeter 3D additive manufacturing.
         </motion.h1>
 
-        {/* Storytelling Subheading (Monospace, text-neutral-400) */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
+        {/* Clean Horizontal Status Ticker */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-sm sm:text-base md:text-lg font-mono text-neutral-400 max-w-3xl mx-auto leading-relaxed"
+          className="py-3 px-4 border-y border-white/[0.08] max-w-3xl mx-auto flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs font-mono text-neutral-400 tracking-wider"
         >
-          Eight years spanning edge hardware diagnostics at Amazon, enterprise compute at Dell, $4.2M in Google ad auctions, private wealth allocation at ICICI Bank, and sub-millimeter 3D additive heritage manufacturing at Templecity Atelier.
-        </motion.p>
-
-        {/* Clean Monospace Index Tracker */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="py-4 border-y border-white/[0.08] max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs sm:text-sm font-mono tracking-wider text-neutral-300"
-        >
-          <span className="hover:text-amber-400 transition-colors">01 HARDWARE</span>
-          <span className="text-neutral-600 select-none">·</span>
-          <span className="hover:text-cyan-400 transition-colors">02 ADTECH</span>
-          <span className="text-neutral-600 select-none">·</span>
-          <span className="hover:text-yellow-400 transition-colors">03 WEALTH</span>
-          <span className="text-neutral-600 select-none">·</span>
-          <span className="hover:text-emerald-400 transition-colors">04 ADDITIVE CRAFT</span>
+          <span>LOCATION: BHUBANESWAR, INDIA</span>
+          <span className="text-white/20 select-none">//</span>
+          <span className="text-neutral-300">STACK: NEXT.JS 15 · THREE.JS · CAD</span>
+          <span className="text-white/20 select-none">//</span>
+          <span className="text-emerald-400 font-semibold">STATUS: AVAILABLE FOR CONSULTING</span>
         </motion.div>
 
-        {/* Action CTAs */}
+        {/* Minimalist Action CTAs */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-6"
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-row items-center justify-center gap-4 pt-4"
         >
           <button
             onClick={onBeginJourney}
-            className="flex items-center justify-center gap-2 px-6 py-3 text-xs md:text-sm font-mono font-medium text-neutral-950 bg-amber-400 hover:bg-amber-300 rounded-lg transition-all shadow-lg shadow-amber-500/20 whitespace-nowrap shrink-0"
+            className="flex items-center gap-2 px-5 py-2.5 text-xs font-mono text-white bg-white/[0.05] hover:bg-white/[0.1] border border-white/10 hover:border-white/20 rounded transition-all"
           >
-            <span>Begin Narrative Scroll</span>
-            <ArrowDown className="w-4 h-4 animate-bounce" />
+            <span>Read Dossier</span>
+            <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
           </button>
 
           <button
             onClick={onOpenTerminal}
-            className="flex items-center justify-center gap-2 px-6 py-3 text-xs md:text-sm font-mono font-medium text-neutral-200 bg-neutral-900 border border-white/10 hover:border-white/25 hover:bg-neutral-800 rounded-lg transition-all whitespace-nowrap shrink-0"
+            className="flex items-center gap-2 px-5 py-2.5 text-xs font-mono text-neutral-400 hover:text-white bg-transparent border border-white/[0.08] hover:border-white/20 rounded transition-all"
           >
-            <Terminal className="w-4 h-4 text-neutral-400" />
-            <span>Open Terminal [~]</span>
+            <Terminal className="w-3.5 h-3.5" />
+            <span>Terminal [~]</span>
           </button>
         </motion.div>
       </motion.div>
-
-      {/* Subtle Scroll Guide at Bottom */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 text-xs font-mono text-neutral-400 pointer-events-none">
-        <Compass className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: '8s' }} />
-        <span>Scroll to traverse seasons & 3D canvas</span>
-      </div>
     </section>
   );
 }

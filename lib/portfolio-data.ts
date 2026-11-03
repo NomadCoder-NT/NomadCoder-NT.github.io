@@ -52,7 +52,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
   {
     id: 'ignition',
     index: '01',
-    title: 'THE BEDROCK',
+    title: 'EDGE HARDWARE & FIRMWARE',
     subtitle: 'Edge Hardware Diagnostics & Firmware Triage',
     organization: 'Amazon Development Centre',
     seasonId: 'summer',
@@ -84,7 +84,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
   {
     id: 'hardware-forge',
     index: '02',
-    title: 'HARDWARE FORGE',
+    title: 'ENTERPRISE COMPUTE ARCHITECTURE',
     subtitle: 'Enterprise Compute Architecture & Inside Sales',
     organization: 'Dell International Services',
     seasonId: 'summer',
@@ -116,7 +116,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
   {
     id: 'data-monsoon',
     index: '03',
-    title: 'DATA MONSOON',
+    title: 'ADTECH AUCTION TELEMETRY',
     subtitle: 'AdTech Telemetry, Auction Engineering & Dashboard Visualizations',
     organization: 'Google Operations Center',
     seasonId: 'monsoon',
@@ -148,7 +148,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
   {
     id: 'cloud-canopy',
     index: '04',
-    title: 'CLOUD CANOPY',
+    title: 'VALUE-BASED ALGORITHMIC SCALING',
     subtitle: 'SMB Consultative Scaling & Automated Smart Bidding',
     organization: 'Accenture Solutions',
     seasonId: 'monsoon',
@@ -180,7 +180,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
   {
     id: 'the-harvest',
     index: '05',
-    title: 'THE HARVEST',
+    title: 'CAPITAL STEWARDSHIP & WEALTH ALLOCATION',
     subtitle: 'Wealth & Trade Relationship Manager, Multi-Asset Allocation & Trade Finance',
     organization: 'ICICI Bank',
     seasonId: 'autumn',
@@ -212,7 +212,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
   {
     id: 'roots-structure',
     index: '06',
-    title: 'ROOTS & STRUCTURE',
+    title: 'ADDITIVE HERITAGE & PARAMETRIC FABRICATION',
     subtitle: 'Co-Founder & Head of Spatial Design, Mukteshvara Torana CAD, CoreXY 3D Printing & Cold-Cast Bronze',
     organization: 'Templecity Atelier LLP',
     seasonId: 'spring',
@@ -244,7 +244,7 @@ export const NARRATIVE_SECTIONS: NarrativeSectionData[] = [
   {
     id: 'the-horizon',
     index: '07',
-    title: 'THE HORIZON',
+    title: 'SPATIAL WEBGL & AUTONOMOUS AI',
     subtitle: 'Full-Stack 3D WebGL Engineering, GLSL Shaders & Hybrid Vector RAG Systems',
     organization: 'nomadcoder-nt Studio',
     seasonId: 'winter',

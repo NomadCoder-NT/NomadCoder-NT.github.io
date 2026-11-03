@@ -17,27 +17,27 @@ export const SEASON_PALETTES = {
   summer: {
     ambient: '#92400e', // warm amber
     spot: '#f59e0b',    // glowing amber
-    fog: '#080402',     // warm dark obsidian
+    fog: '#020408',     // pure obsidian #020408
   },
   monsoon: {
     ambient: '#0369a1', // deep storm blue
     spot: '#00f0ff',    // electric cyan
-    fog: '#02060f',     // deep navy obsidian
+    fog: '#020408',     // pure obsidian #020408
   },
   autumn: {
     ambient: '#854d0e', // harvest bronze
     spot: '#eab308',    // radiant gold
-    fog: '#060501',     // rich bronze obsidian
+    fog: '#020408',     // pure obsidian #020408
   },
   spring: {
     ambient: '#065f46', // emerald forest
     spot: '#10b981',    // vibrant emerald
-    fog: '#010905',     // deep emerald obsidian
+    fog: '#020408',     // pure obsidian #020408
   },
   winter: {
     ambient: '#075985', // deep frost blue
     spot: '#38bdf8',    // crisp ice blue
-    fog: '#020814',     // icy frost obsidian
+    fog: '#020408',     // pure obsidian #020408
   },
 } as const;
 
@@ -280,7 +280,7 @@ export function StoryScene({
       />
 
       {/* Atmospheric Fog smoothly modulated by active season's background color */}
-      <fog ref={fogRef} attach="fog" args={['#080402', 5, 22]} />
+      <fog ref={fogRef} attach="fog" args={['#020408', 5, 24]} />
 
       {/* Strict conditional unmounting (opacities[season] > 0.01) to lock 60 FPS */}
       {opacities.summer > 0.01 && (

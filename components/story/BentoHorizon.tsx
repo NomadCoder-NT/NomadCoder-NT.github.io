@@ -104,7 +104,7 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);`,
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {/* Card 1: Interactive Stack & Skill Matrix (Spans 2 cols) */}
-          <div className="md:col-span-2 p-6 rounded-2xl bg-neutral-950/85 backdrop-blur-md border border-white/10 shadow-xl flex flex-col justify-between">
+          <div className="md:col-span-2 p-6 rounded-xl bg-white/[0.015] border border-white/[0.08] shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
                 <div className="flex items-center gap-2">
@@ -160,7 +160,7 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);`,
           </div>
 
           {/* Card 2: GitHub Repository & Open Source (Spans 1 col) */}
-          <div className="p-6 rounded-2xl bg-neutral-950/85 backdrop-blur-md border border-white/10 shadow-xl flex flex-col justify-between group hover:border-cyan-500/40 transition-colors">
+          <div className="p-6 rounded-xl bg-white/[0.015] border border-white/[0.08] shadow-xl flex flex-col justify-between group hover:border-cyan-500/40 transition-colors">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
                 <div className="flex items-center gap-2">
@@ -211,7 +211,7 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);`,
           </div>
 
           {/* Card 3: Direct Contact & Dispatch Card (Spans 1 col) */}
-          <div className="p-6 rounded-2xl bg-neutral-950/85 backdrop-blur-md border border-white/10 shadow-xl flex flex-col justify-between">
+          <div className="p-6 rounded-xl bg-white/[0.015] border border-white/[0.08] shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
                 <div className="flex items-center gap-2">
@@ -262,7 +262,7 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);`,
           </div>
 
           {/* Card 4: Architecture Synthesis & Code Harness (Spans 2 cols) */}
-          <div className="md:col-span-2 p-6 rounded-2xl bg-neutral-950/85 backdrop-blur-md border border-white/10 shadow-xl flex flex-col justify-between">
+          <div className="md:col-span-2 p-6 rounded-xl bg-white/[0.015] border border-white/[0.08] shadow-xl flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-white/5 mb-4">
                 <div className="flex items-center gap-2">
