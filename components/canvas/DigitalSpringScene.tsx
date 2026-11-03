@@ -4,6 +4,7 @@ import React, { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { seededRandom } from '@/lib/math';
+import { ToranaArchModel } from './models/ToranaArchModel';
 
 interface DigitalSpringProps {
   opacity: number;
@@ -69,7 +70,6 @@ const NEURAL_SPORES_FRAGMENT_SHADER = /* glsl */ `
 export function DigitalSpringScene({ opacity, isMobile, densityFactor = 1 }: DigitalSpringProps) {
   const sporesMatRef = useRef<THREE.ShaderMaterial>(null);
   const neuralGroupRef = useRef<THREE.Group>(null);
-  const archGroupRef = useRef<THREE.Group>(null);
 
   const nodeCount = isMobile ? 45 : 90;
 
@@ -121,18 +121,6 @@ export function DigitalSpringScene({ opacity, isMobile, densityFactor = 1 }: Dig
     };
   }, [nodeCount, isMobile]);
 
-  // Parametric Mukteshvara Torana Arch points
-  const toranaArchGeometry = useMemo(() => {
-    const points: THREE.Vector3[] = [];
-    for (let angle = 0; angle <= Math.PI; angle += Math.PI / 48) {
-      const radius = 1.8;
-      const x = Math.cos(angle) * radius;
-      const y = Math.sin(angle) * radius + 1.2;
-      points.push(new THREE.Vector3(x, y, 0));
-    }
-    return new THREE.BufferGeometry().setFromPoints(points);
-  }, []);
-
   const sporesUniforms = useMemo(
     () => ({
       uTime: { value: 0 },
@@ -159,11 +147,6 @@ export function DigitalSpringScene({ opacity, isMobile, densityFactor = 1 }: Dig
     if (neuralGroupRef.current) {
       neuralGroupRef.current.rotation.y += delta * 0.12;
       neuralGroupRef.current.rotation.x = Math.sin(time * 0.3) * 0.1;
-    }
-
-    if (archGroupRef.current) {
-      archGroupRef.current.position.y = Math.sin(time * 0.8) * 0.12 - 0.2;
-      archGroupRef.current.rotation.y = Math.sin(time * 0.4) * 0.2;
     }
   });
 
@@ -207,111 +190,8 @@ export function DigitalSpringScene({ opacity, isMobile, densityFactor = 1 }: Dig
         />
       </group>
 
-      {/* Mukteshvara Torana Heritage Architectural Wireframe in Emerald and Cyan */}
-      <group ref={archGroupRef} position={[isMobile ? 0 : 2.6, 0, -2]}>
-        {/* Left Column Pillar */}
-        <mesh position={[-1.8, -0.6, 0]}>
-          <cylinderGeometry args={[0.18, 0.22, 3.6, 16]} />
-          <meshStandardMaterial
-            color="#10b981"
-            emissive="#065f46"
-            emissiveIntensity={0.6 * opacity}
-            wireframe
-            transparent
-            opacity={opacity * 0.75}
-          />
-        </mesh>
-
-        {/* Right Column Pillar */}
-        <mesh position={[1.8, -0.6, 0]}>
-          <cylinderGeometry args={[0.18, 0.22, 3.6, 16]} />
-          <meshStandardMaterial
-            color="#10b981"
-            emissive="#065f46"
-            emissiveIntensity={0.6 * opacity}
-            wireframe
-            transparent
-            opacity={opacity * 0.75}
-          />
-        </mesh>
-
-        {/* Pillar Pedestals */}
-        <mesh position={[-1.8, -2.4, 0]}>
-          <boxGeometry args={[0.7, 0.4, 0.7]} />
-          <meshBasicMaterial
-            color="#06b6d4"
-            wireframe
-            transparent
-            opacity={opacity * 0.6}
-          />
-        </mesh>
-        <mesh position={[1.8, -2.4, 0]}>
-          <boxGeometry args={[0.7, 0.4, 0.7]} />
-          <meshBasicMaterial
-            color="#06b6d4"
-            wireframe
-            transparent
-            opacity={opacity * 0.6}
-          />
-        </mesh>
-
-        {/* Semicircular Torana Archway */}
-        <primitive
-          object={
-            new THREE.Line(
-              toranaArchGeometry,
-              new THREE.LineBasicMaterial({
-                color: 0x06b6d4,
-                transparent: true,
-                opacity: opacity * 0.9,
-              })
-            )
-          }
-        />
-
-        {/* Inner concentric arch torus */}
-        <mesh position={[0, 1.2, 0]} rotation={[0, 0, 0]}>
-          <torusGeometry args={[1.8, 0.08, 12, 32, Math.PI]} />
-          <meshStandardMaterial
-            color="#06b6d4"
-            emissive="#0891b2"
-            emissiveIntensity={0.8 * opacity}
-            wireframe
-            transparent
-            opacity={opacity * 0.7}
-          />
-        </mesh>
-
-        {/* Central Arch Crest Medallion / Kalasa Finial */}
-        <mesh position={[0, 3.2, 0]}>
-          <octahedronGeometry args={[0.42, 1]} />
-          <meshStandardMaterial
-            color="#10b981"
-            emissive="#059669"
-            emissiveIntensity={0.9 * opacity}
-            wireframe
-            transparent
-            opacity={opacity * 0.85}
-          />
-        </mesh>
-
-        {/* Horizontal beam connector */}
-        <mesh position={[0, 1.2, 0]}>
-          <boxGeometry args={[3.8, 0.14, 0.3]} />
-          <meshStandardMaterial
-            color="#06b6d4"
-            wireframe
-            transparent
-            opacity={opacity * 0.7}
-          />
-        </mesh>
-      </group>
-
-      {/* Cyber Emerald Matrix Ground Grid */}
-      <gridHelper
-        args={[16, 24, '#06b6d4', '#022c22']}
-        position={[0, -3.2, 0]}
-      />
+      {/* Mukteshvara Torana Heritage Architectural Wireframe Model */}
+      <ToranaArchModel opacity={opacity} isMobile={isMobile} />
     </group>
   );
 }

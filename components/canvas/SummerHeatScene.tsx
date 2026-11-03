@@ -4,6 +4,7 @@ import React, { useMemo, useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { seededRandom } from '@/lib/math';
+import { ServerDieModel } from './models/ServerDieModel';
 
 interface SummerHeatProps {
   opacity: number;
@@ -74,9 +75,6 @@ const THERMAL_DUST_FRAGMENT_SHADER = /* glsl */ `
 
 export function SummerHeatScene({ opacity, isMobile, densityFactor = 1 }: SummerHeatProps) {
   const dustMatRef = useRef<THREE.ShaderMaterial>(null);
-  const hardwareGroupRef = useRef<THREE.Group>(null);
-  const chipRef = useRef<THREE.Mesh>(null);
-  const orbitGroupRef = useRef<THREE.Group>(null);
 
   const particleCount = isMobile ? 400 : 950;
 
@@ -113,7 +111,7 @@ export function SummerHeatScene({ opacity, isMobile, densityFactor = 1 }: Summer
     []
   );
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     if (opacity <= 0.01) return;
 
     const time = state.clock.elapsedTime;
@@ -122,20 +120,6 @@ export function SummerHeatScene({ opacity, isMobile, densityFactor = 1 }: Summer
       dustUniforms.uTime.value = time;
       dustUniforms.uOpacity.value = opacity;
       dustUniforms.uDensity.value = densityFactor;
-    }
-
-    // Hardware wireframes rotation
-    if (hardwareGroupRef.current) {
-      hardwareGroupRef.current.rotation.y += delta * 0.25;
-      hardwareGroupRef.current.rotation.x = Math.sin(time * 0.4) * 0.15;
-    }
-
-    if (chipRef.current) {
-      chipRef.current.rotation.z += delta * 0.18;
-    }
-
-    if (orbitGroupRef.current) {
-      orbitGroupRef.current.rotation.y -= delta * 0.35;
     }
   });
 
@@ -164,62 +148,8 @@ export function SummerHeatScene({ opacity, isMobile, densityFactor = 1 }: Summer
         />
       </points>
 
-      {/* Floating Hardware Wireframes (Dell & Amazon Compute Era) */}
-      <group ref={hardwareGroupRef} position={[isMobile ? 0 : 2.5, 0, -2]}>
-        {/* Central Core Microprocessor Die */}
-        <mesh ref={chipRef}>
-          <boxGeometry args={[2.2, 0.2, 2.2]} />
-          <meshStandardMaterial
-            color="#d97706"
-            emissive="#b45309"
-            emissiveIntensity={0.6 * opacity}
-            wireframe
-            transparent
-            opacity={opacity * 0.85}
-          />
-        </mesh>
-
-        {/* Outer Heat Spreader Ring */}
-        <mesh rotation={[Math.PI / 2, 0, 0]}>
-          <ringGeometry args={[2.0, 2.4, 32]} />
-          <meshBasicMaterial
-            color="#f59e0b"
-            wireframe
-            transparent
-            opacity={opacity * 0.6}
-            side={THREE.DoubleSide}
-          />
-        </mesh>
-
-        {/* Orbiting Hardware Nodes (Server Blades / Memory Modules) */}
-        <group ref={orbitGroupRef}>
-          {[0, 1, 2, 3].map((idx) => {
-            const angle = (idx * Math.PI) / 2;
-            const dist = 3.6;
-            return (
-              <mesh
-                key={idx}
-                position={[Math.cos(angle) * dist, Math.sin(angle) * 0.6, Math.sin(angle) * dist]}
-                rotation={[0.3 * idx, angle, 0]}
-              >
-                <boxGeometry args={[0.8, 1.4, 0.15]} />
-                <meshStandardMaterial
-                  color="#fbbf24"
-                  wireframe
-                  transparent
-                  opacity={opacity * 0.7}
-                />
-              </mesh>
-            );
-          })}
-        </group>
-
-        {/* Structural Circuit Foundation Grid in Amber and Copper */}
-        <gridHelper
-          args={[8, 16, '#f59e0b', '#78350f']}
-          position={[0, -2.5, 0]}
-        />
-      </group>
+      {/* 3D Monolithic Silicon Die & Server Hardware Package */}
+      <ServerDieModel opacity={opacity} isMobile={isMobile} />
     </group>
   );
 }

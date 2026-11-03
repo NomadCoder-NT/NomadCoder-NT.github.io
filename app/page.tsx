@@ -8,6 +8,7 @@ import { ScrollProgressHUD } from '@/components/ui/ScrollProgressHUD';
 import { VerticalDotNav } from '@/components/ui/VerticalDotNav';
 import { StoryHero } from '@/components/story/StoryHero';
 import { NarrativeSection } from '@/components/story/NarrativeSection';
+import { AdditiveBench } from '@/components/story/AdditiveBench';
 import { BentoHorizon } from '@/components/story/BentoHorizon';
 import { TerminalModal } from '@/components/terminal/TerminalModal';
 import { SectionNavigatorModal } from '@/components/navigator/SectionNavigatorModal';
@@ -16,7 +17,16 @@ import { CustomCursor } from '@/components/ui/CustomCursor';
 import { SeasonMode } from '@/components/canvas/StoryScene';
 import { getRealCurrentSeason } from '@/lib/real-seasons';
 import { NARRATIVE_SECTIONS } from '@/lib/portfolio-data';
+import { SeasonId } from '@/types/portfolio';
 import { soundEngine } from '@/components/sound/sound-synthesizer';
+
+const getSeasonForSectionIdx = (idx: number): SeasonId => {
+  if (idx <= 1) return 'summer';
+  if (idx <= 3) return 'monsoon';
+  if (idx === 4) return 'autumn';
+  if (idx === 5) return 'spring';
+  return 'winter';
+};
 
 export default function Home() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -37,19 +47,6 @@ export default function Home() {
           const progress = totalHeight > 0 ? Math.min(1, Math.max(0, currentScroll / totalHeight)) : 0;
           setScrollProgress(progress);
 
-          // Update active season atmosphere in procedural audio engine when in story mode
-          if (seasonMode === 'story') {
-            if (progress > 0.72) {
-              soundEngine.setSeasonAtmosphere('spring');
-            } else if (progress > 0.5) {
-              soundEngine.setSeasonAtmosphere('autumn');
-            } else if (progress > 0.25) {
-              soundEngine.setSeasonAtmosphere('monsoon');
-            } else {
-              soundEngine.setSeasonAtmosphere('summer');
-            }
-          }
-
           // Compute active section based on proximity to viewport mid
           const sectionElements = NARRATIVE_SECTIONS.map((s) => document.getElementById(s.id));
           const viewportMid = window.scrollY + window.innerHeight * 0.45;
@@ -62,6 +59,12 @@ export default function Home() {
           });
           setActiveSectionIdx(currentIdx);
 
+          // Update active season atmosphere in procedural audio engine when in story mode
+          const currentSeason = getSeasonForSectionIdx(currentIdx);
+          if (seasonMode === 'story') {
+            soundEngine.setSeasonAtmosphere(currentSeason);
+          }
+
           ticking = false;
         });
         ticking = true;
@@ -73,6 +76,20 @@ export default function Home() {
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, [seasonMode]);
+
+  // Synchronize dynamic [data-season] attribute on <html> with active season
+  useEffect(() => {
+    const currentSeason =
+      seasonMode !== 'story'
+        ? seasonMode === 'live'
+          ? getRealCurrentSeason().id
+          : seasonMode
+        : getSeasonForSectionIdx(activeSectionIdx);
+
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-season', currentSeason);
+    }
+  }, [activeSectionIdx, seasonMode]);
 
   // Synchronize audio atmosphere when seasonMode explicitly changes
   useEffect(() => {
@@ -179,7 +196,7 @@ export default function Home() {
         <div className="relative z-10">
           {/* Glowing vertical lifecycle flow spine pulsing in sync with global scroll */}
           <div
-            className="absolute left-1/2 -translate-x-1/2 top-32 bottom-32 w-[1px] bg-gradient-to-b from-amber-500/20 via-cyan-500/25 via-yellow-500/25 to-emerald-500/25 pointer-events-none -z-10 hidden sm:block"
+            className="absolute left-1/2 -translate-x-1/2 top-32 bottom-32 w-[1px] bg-gradient-to-b from-amber-500/20 via-cyan-500/25 via-yellow-500/25 via-emerald-500/25 to-sky-500/25 pointer-events-none -z-10 hidden sm:block"
             aria-hidden="true"
           >
             <div
@@ -190,15 +207,18 @@ export default function Home() {
             />
           </div>
 
-          {NARRATIVE_SECTIONS.slice(0, 7).map((section, idx) => (
-            <NarrativeSection
-              key={section.id}
-              section={section}
-              isActive={activeSectionIdx === idx}
-              nextSection={NARRATIVE_SECTIONS[idx + 1]}
-              isFirst={idx === 0}
-              isLast={false}
-            />
+          {NARRATIVE_SECTIONS.map((section, idx) => (
+            <React.Fragment key={section.id}>
+              <NarrativeSection
+                section={section}
+                isActive={activeSectionIdx === idx}
+                nextSection={NARRATIVE_SECTIONS[idx + 1]}
+                isFirst={idx === 0}
+                isLast={idx === NARRATIVE_SECTIONS.length - 1}
+              />
+              {/* AdditiveBench sits smoothly between Chapter 05 (ICICI Bank) and Chapter 06 (Templecity Atelier) */}
+              {idx === 4 && <AdditiveBench />}
+            </React.Fragment>
           ))}
 
           {/* Section 08: The Horizon - Bento Grid Layout */}

@@ -31,10 +31,9 @@ const SECTION_SEASON_MAP: BurstSeasonType[] = [
   'summer',  // 02 HARDWARE FORGE
   'monsoon', // 03 DATA MONSOON
   'monsoon', // 04 CLOUD CANOPY
-  'autumn',  // 05 ROOTS & STRUCTURE
-  'autumn',  // 06 THE HARVEST
-  'spring',  // 07 NEURAL SPRING
-  'spring',  // 08 THE HORIZON
+  'autumn',  // 05 THE HARVEST
+  'spring',  // 06 ROOTS & STRUCTURE
+  'winter',  // 07 THE HORIZON
 ];
 
 export function UniqueParticleBurstSystem({

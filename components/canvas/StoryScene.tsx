@@ -16,28 +16,28 @@ export type SeasonMode = 'story' | 'live' | RealSeasonId;
 export const SEASON_PALETTES = {
   summer: {
     ambient: '#92400e', // warm amber
-    spot: '#fbbf24',    // glowing copper/amber
-    fog: '#080502',     // warm dark obsidian
+    spot: '#f59e0b',    // glowing amber
+    fog: '#080402',     // warm dark obsidian
   },
   monsoon: {
     ambient: '#0369a1', // deep storm blue
     spot: '#00f0ff',    // electric cyan
-    fog: '#030812',     // deep navy obsidian
+    fog: '#02060f',     // deep navy obsidian
   },
   autumn: {
     ambient: '#854d0e', // harvest bronze
-    spot: '#facc15',    // radiant gold
-    fog: '#0a0702',     // rich bronze obsidian
+    spot: '#eab308',    // radiant gold
+    fog: '#060501',     // rich bronze obsidian
   },
   spring: {
     ambient: '#065f46', // emerald forest
-    spot: '#06b6d4',    // vibrant cyan
-    fog: '#020908',     // deep emerald obsidian
+    spot: '#10b981',    // vibrant emerald
+    fog: '#010905',     // deep emerald obsidian
   },
   winter: {
     ambient: '#075985', // deep frost blue
-    spot: '#e0f2fe',    // crisp ice white
-    fog: '#030a14',     // icy frost obsidian
+    spot: '#38bdf8',    // crisp ice blue
+    fog: '#020814',     // icy frost obsidian
   },
 } as const;
 
@@ -63,7 +63,7 @@ export function StoryScene({
 
   const realCurrentSeason = useMemo(() => getRealCurrentSeason().id, []);
 
-  // Compute season opacities based on scrollProgress or explicit season mode
+  // Compute season opacities across all 5 seasons based on scrollProgress or explicit season mode
   const opacities = useMemo(() => {
     let effectiveSeason = seasonMode;
     if (seasonMode === 'live') {
@@ -82,39 +82,47 @@ export function StoryScene({
       return { summer: 0, monsoon: 0, autumn: 0, spring: 1, winter: 0 };
     }
 
-    // Default 'story' mode: smooth scroll progression across lifecycle seasons
+    // Default 'story' mode: smooth scroll progression across all 5 seasons
     const p = scrollProgress;
     let summer = 0;
     let monsoon = 0;
     let autumn = 0;
     let spring = 0;
+    let winter = 0;
 
-    if (p <= 0.25) {
+    if (p <= 0.26) {
       summer = 1;
-      if (p > 0.18) {
-        const t = (p - 0.18) / 0.07;
+      if (p > 0.19) {
+        const t = (p - 0.19) / 0.07;
         summer = 1 - t;
         monsoon = t;
       }
-    } else if (p <= 0.5) {
+    } else if (p <= 0.50) {
       monsoon = 1;
       if (p > 0.43) {
         const t2 = (p - 0.43) / 0.07;
         monsoon = 1 - t2;
         autumn = t2;
       }
-    } else if (p <= 0.72) {
+    } else if (p <= 0.68) {
       autumn = 1;
-      if (p > 0.65) {
-        const t = (p - 0.65) / 0.07;
-        autumn = 1 - t;
-        spring = t;
+      if (p > 0.61) {
+        const t3 = (p - 0.61) / 0.07;
+        autumn = 1 - t3;
+        spring = t3;
+      }
+    } else if (p <= 0.84) {
+      spring = 1;
+      if (p > 0.77) {
+        const t4 = (p - 0.77) / 0.07;
+        spring = 1 - t4;
+        winter = t4;
       }
     } else {
-      spring = 1;
+      winter = 1;
     }
 
-    return { summer, monsoon, autumn, spring, winter: 0 };
+    return { summer, monsoon, autumn, spring, winter };
   }, [seasonMode, realCurrentSeason, scrollProgress]);
 
   // Interpolate ambient, spotlight, and fog colors smoothly using damp/lerp targets
@@ -130,7 +138,7 @@ export function StoryScene({
       };
     }
 
-    // Story scroll mode: dynamically lerp ambient, spot light, and fog colors along scrollProgress [0..1]
+    // Story scroll mode: dynamically lerp ambient, spot light, and fog colors across all 5 seasons along scrollProgress [0..1]
     const summerAmb = new THREE.Color(SEASON_PALETTES.summer.ambient);
     const summerSpt = new THREE.Color(SEASON_PALETTES.summer.spot);
     const summerFog = new THREE.Color(SEASON_PALETTES.summer.fog);
@@ -147,23 +155,27 @@ export function StoryScene({
     const springSpt = new THREE.Color(SEASON_PALETTES.spring.spot);
     const springFog = new THREE.Color(SEASON_PALETTES.spring.fog);
 
+    const winterAmb = new THREE.Color(SEASON_PALETTES.winter.ambient);
+    const winterSpt = new THREE.Color(SEASON_PALETTES.winter.spot);
+    const winterFog = new THREE.Color(SEASON_PALETTES.winter.fog);
+
     const p = scrollProgress;
     const interpolatedAmbient = new THREE.Color();
     const interpolatedSpot = new THREE.Color();
     const interpolatedFog = new THREE.Color();
 
-    if (p <= 0.25) {
-      if (p <= 0.18) {
+    if (p <= 0.26) {
+      if (p <= 0.19) {
         interpolatedAmbient.copy(summerAmb);
         interpolatedSpot.copy(summerSpt);
         interpolatedFog.copy(summerFog);
       } else {
-        const t = (p - 0.18) / 0.07;
+        const t = (p - 0.19) / 0.07;
         interpolatedAmbient.lerpColors(summerAmb, monsoonAmb, t);
         interpolatedSpot.lerpColors(summerSpt, monsoonSpt, t);
         interpolatedFog.lerpColors(summerFog, monsoonFog, t);
       }
-    } else if (p <= 0.5) {
+    } else if (p <= 0.50) {
       if (p <= 0.43) {
         interpolatedAmbient.copy(monsoonAmb);
         interpolatedSpot.copy(monsoonSpt);
@@ -174,21 +186,32 @@ export function StoryScene({
         interpolatedSpot.lerpColors(monsoonSpt, autumnSpt, t);
         interpolatedFog.lerpColors(monsoonFog, autumnFog, t);
       }
-    } else if (p <= 0.72) {
-      if (p <= 0.65) {
+    } else if (p <= 0.68) {
+      if (p <= 0.61) {
         interpolatedAmbient.copy(autumnAmb);
         interpolatedSpot.copy(autumnSpt);
         interpolatedFog.copy(autumnFog);
       } else {
-        const t = (p - 0.65) / 0.07;
+        const t = (p - 0.61) / 0.07;
         interpolatedAmbient.lerpColors(autumnAmb, springAmb, t);
         interpolatedSpot.lerpColors(autumnSpt, springSpt, t);
         interpolatedFog.lerpColors(autumnFog, springFog, t);
       }
+    } else if (p <= 0.84) {
+      if (p <= 0.77) {
+        interpolatedAmbient.copy(springAmb);
+        interpolatedSpot.copy(springSpt);
+        interpolatedFog.copy(springFog);
+      } else {
+        const t = (p - 0.77) / 0.07;
+        interpolatedAmbient.lerpColors(springAmb, winterAmb, t);
+        interpolatedSpot.lerpColors(springSpt, winterSpt, t);
+        interpolatedFog.lerpColors(springFog, winterFog, t);
+      }
     } else {
-      interpolatedAmbient.copy(springAmb);
-      interpolatedSpot.copy(springSpt);
-      interpolatedFog.copy(springFog);
+      interpolatedAmbient.copy(winterAmb);
+      interpolatedSpot.copy(winterSpt);
+      interpolatedFog.copy(winterFog);
     }
 
     return {
@@ -224,7 +247,7 @@ export function StoryScene({
     );
     state.camera.lookAt(0, -scrollProgress * 0.5, 0);
 
-    // Smoothly interpolate ambient, spotlight, and fog colors using lerp
+    // Smoothly interpolate ambient, spotlight, and scene fog colors towards the active season's background palette
     if (ambientLightRef.current) {
       ambientLightRef.current.color.lerp(targetAmbient, 0.06);
     }
@@ -235,6 +258,9 @@ export function StoryScene({
     }
     if (fogRef.current) {
       fogRef.current.color.lerp(targetFog, 0.06);
+    }
+    if (state.scene.fog && state.scene.fog instanceof THREE.Fog) {
+      state.scene.fog.color.lerp(targetFog, 0.06);
     }
   });
 
@@ -253,8 +279,8 @@ export function StoryScene({
         distance={24}
       />
 
-      {/* Atmospheric Fog smoothly modulated by SEASON_PALETTES */}
-      <fog ref={fogRef} attach="fog" args={['#05070c', 5, 22]} />
+      {/* Atmospheric Fog smoothly modulated by active season's background color */}
+      <fog ref={fogRef} attach="fog" args={['#080402', 5, 22]} />
 
       {/* Strict conditional unmounting (opacities[season] > 0.01) to lock 60 FPS */}
       {opacities.summer > 0.01 && (

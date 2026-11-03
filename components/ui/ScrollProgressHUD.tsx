@@ -5,6 +5,7 @@ import { Volume2, VolumeX, Compass, Sparkles, ChevronUp, Check, Layers } from 'l
 import { soundEngine } from '@/components/sound/sound-synthesizer';
 import { SeasonMode } from '@/components/canvas/StoryScene';
 import { getRealCurrentSeason, REAL_SEASONS, RealSeasonId } from '@/lib/real-seasons';
+import { NARRATIVE_SECTIONS } from '@/lib/portfolio-data';
 
 interface ScrollProgressHUDProps {
   scrollProgress: number;
@@ -179,13 +180,13 @@ export function ScrollProgressHUD({
 
         {/* Section Scrubber Dots */}
         <div className="flex items-center gap-1.5">
-          {['ignition', 'hardware-forge', 'data-monsoon', 'cloud-canopy', 'roots-structure', 'the-harvest', 'neural-spring', 'the-horizon'].map((id, idx) => (
+          {NARRATIVE_SECTIONS.map((section, idx) => (
             <button
-              key={id}
-              onClick={() => onNavigateSection(id)}
+              key={section.id}
+              onClick={() => onNavigateSection(section.id)}
               onMouseEnter={() => soundEngine.playHapticFeedback('dot')}
-              title={`Jump to chapter 0${idx + 1}`}
-              className={`h-2 rounded-full transition-all ${
+              title={`Jump to chapter ${section.index} · ${section.title}`}
+              className={`h-2 rounded-full transition-all cursor-pointer ${
                 currentSectionIndex === idx
                   ? 'w-5 bg-amber-400 shadow-sm shadow-amber-400/50'
                   : 'w-2 bg-neutral-700 hover:bg-neutral-500'

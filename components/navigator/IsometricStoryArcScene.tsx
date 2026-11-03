@@ -18,24 +18,24 @@ interface IsometricStoryArcSceneProps {
   cameraResetTrigger: number;
 }
 
-// Compute 8 isometric coordinates along an ascending circuit arc
+// Compute 7 isometric coordinates along an ascending circuit arc
 const ARC_NODE_POSITIONS: [number, number, number][] = [
   [-4.2, -1.4, 4.2],  // 01. Ignition (Summer)
-  [-2.4, -1.0, 3.6],  // 02. Hardware Forge (Summer)
-  [-1.0, -0.6, 2.5],  // 03. Data Monsoon (Monsoon)
-  [-0.2, -0.2, 0.9],  // 04. Cloud Canopy (Monsoon)
-  [0.2, 0.2, -0.9],   // 05. Roots & Structure (Spring/Roots)
-  [1.0, 0.6, -2.5],   // 06. The Harvest (Autumn)
-  [2.4, 1.0, -3.6],   // 07. Neural Spring (Spring)
-  [4.2, 1.4, -4.2],   // 08. The Horizon (Spring/Horizon)
+  [-2.6, -1.0, 3.4],  // 02. Hardware Forge (Summer)
+  [-1.2, -0.6, 2.2],  // 03. Data Monsoon (Monsoon)
+  [0.0, -0.2, 0.8],   // 04. Cloud Canopy (Monsoon)
+  [1.2, 0.4, -0.8],   // 05. The Harvest (Autumn)
+  [2.6, 0.9, -2.4],   // 06. Roots & Structure (Spring)
+  [4.2, 1.4, -4.2],   // 07. The Horizon (Winter)
 ];
 
 // Color palette mapping per season
 const SEASON_COLORS: Record<string, { primary: string; emissive: string; hex: number }> = {
   summer: { primary: '#f59e0b', emissive: '#d97706', hex: 0xf59e0b },
-  monsoon: { primary: '#38bdf8', emissive: '#0284c7', hex: 0x38bdf8 },
+  monsoon: { primary: '#00f0ff', emissive: '#0284c7', hex: 0x00f0ff },
   autumn: { primary: '#eab308', emissive: '#ca8a04', hex: 0xeab308 },
   spring: { primary: '#10b981', emissive: '#059669', hex: 0x10b981 },
+  winter: { primary: '#38bdf8', emissive: '#0284c7', hex: 0x38bdf8 },
 };
 
 // 3D Spline Connecting Arc Path with Animated Energy Pulses

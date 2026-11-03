@@ -82,11 +82,12 @@ export function SectionNavigatorModal({
 
   const seasonFilterOptions = useMemo(
     () => [
-      { id: null, label: 'All Arc (8)', color: 'border-white/20 text-neutral-200' },
+      { id: null, label: 'All Arc (7)', color: 'border-white/20 text-neutral-200' },
       { id: 'summer', label: 'Summer (2)', color: 'border-amber-500/40 text-amber-300' },
-      { id: 'monsoon', label: 'Monsoon (2)', color: 'border-sky-500/40 text-sky-300' },
+      { id: 'monsoon', label: 'Monsoon (2)', color: 'border-cyan-400/40 text-cyan-300' },
       { id: 'autumn', label: 'Autumn (1)', color: 'border-yellow-500/40 text-yellow-300' },
-      { id: 'spring', label: 'Spring (3)', color: 'border-emerald-500/40 text-emerald-300' },
+      { id: 'spring', label: 'Spring (1)', color: 'border-emerald-500/40 text-emerald-300' },
+      { id: 'winter', label: 'Winter (1)', color: 'border-sky-400/40 text-sky-300' },
     ],
     []
   );

@@ -62,7 +62,7 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);`,
   return (
     <section
       ref={sectionRef}
-      id="the-horizon"
+      id="bento-horizon"
       className="min-h-screen py-24 px-4 md:px-12 relative flex items-center justify-center overflow-hidden"
     >
       <motion.div
@@ -73,13 +73,13 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);`,
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="w-full max-w-6xl"
       >
-        {/* Incoming Lifecycle Connection Terminus from Chapter 07 (Neural Spring) */}
+        {/* Incoming Lifecycle Connection Terminus from Chapter 07 (The Horizon) */}
         <div className="flex flex-col items-center mb-8 pointer-events-none" aria-hidden="true">
-          <div className="w-[2px] h-10 bg-gradient-to-b from-transparent via-emerald-400/40 to-emerald-400/80" />
+          <div className="w-[2px] h-10 bg-gradient-to-b from-transparent via-sky-400/40 to-sky-400/80" />
           <div className="relative flex items-center justify-center">
-            <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-emerald-400/60 opacity-75" />
-            <div className="w-2.5 h-2.5 rounded-full border border-emerald-400/60 bg-neutral-950 flex items-center justify-center shadow-[0_0_8px_rgba(16,185,129,0.5)]">
-              <div className="w-1 h-1 rounded-full bg-emerald-400" />
+            <span className="animate-ping absolute inline-flex h-3 w-3 rounded-full bg-sky-400/60 opacity-75" />
+            <div className="w-2.5 h-2.5 rounded-full border border-sky-400/60 bg-neutral-950 flex items-center justify-center shadow-[0_0_8px_rgba(56,189,248,0.5)]">
+              <div className="w-1 h-1 rounded-full bg-sky-400" />
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@ gl_Position = projectionMatrix * modelViewMatrix * vec4(displaced, 1.0);`,
         {/* Section Header */}
         <div className="mb-12 text-center md:text-left">
           <div className="flex flex-wrap items-center justify-center md:justify-start gap-2 text-xs font-mono text-neutral-400 mb-3">
-            <span className="font-semibold text-emerald-400">08. Digital Spring</span>
+            <span className="font-semibold text-sky-400">08. The Horizon Console</span>
             <span aria-hidden="true">·</span>
             <span>Current & Future Synthesis</span>
             <span aria-hidden="true">·</span>

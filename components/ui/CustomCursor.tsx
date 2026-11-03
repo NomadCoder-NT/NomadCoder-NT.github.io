@@ -73,12 +73,15 @@ export function CustomCursor() {
   const season = magneticTarget?.seasonId || 'summer';
 
   // Seasonal color styling
-  const seasonRingStyles = {
+  const seasonRingStyles: Record<string, string> = {
     summer: 'border-amber-400/60 bg-amber-400/10 shadow-[0_0_20px_rgba(245,158,11,0.25)]',
     monsoon: 'border-sky-400/60 bg-sky-400/10 shadow-[0_0_20px_rgba(56,189,248,0.25)]',
     autumn: 'border-yellow-400/60 bg-yellow-400/10 shadow-[0_0_20px_rgba(234,179,8,0.25)]',
     spring: 'border-emerald-400/60 bg-emerald-400/10 shadow-[0_0_20px_rgba(16,185,129,0.25)]',
-  }[season];
+    winter: 'border-sky-400/60 bg-sky-400/10 shadow-[0_0_20px_rgba(56,189,248,0.25)]',
+  };
+
+  const ringStyle = seasonRingStyles[season] || seasonRingStyles.summer;
 
   return (
     <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
@@ -102,7 +105,7 @@ export function CustomCursor() {
         }}
         className={`rounded-full border backdrop-blur-[1px] transition-colors duration-300 ${
           isMagnetic
-            ? seasonRingStyles
+            ? ringStyle
             : 'border-white/30 bg-white/5'
         }`}
       />
@@ -121,10 +124,12 @@ export function CustomCursor() {
             ? season === 'summer'
               ? '#f59e0b'
               : season === 'monsoon'
-              ? '#38bdf8'
+              ? '#00f0ff'
               : season === 'autumn'
               ? '#eab308'
-              : '#10b981'
+              : season === 'spring'
+              ? '#10b981'
+              : '#38bdf8'
             : '#ffffff',
         }}
         transition={{ duration: 0.2 }}

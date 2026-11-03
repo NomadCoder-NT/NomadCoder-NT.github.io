@@ -32,6 +32,8 @@ export function VerticalDotNav({
         return 'bg-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.6)] w-2.5 h-6';
       case 'spring':
         return 'bg-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.6)] w-2.5 h-6';
+      case 'winter':
+        return 'bg-sky-400 shadow-[0_0_12px_rgba(56,189,248,0.6)] w-2.5 h-6';
       default:
         return 'bg-amber-400 w-2.5 h-6';
     }
@@ -47,6 +49,8 @@ export function VerticalDotNav({
         return 'text-yellow-400';
       case 'spring':
         return 'text-emerald-400';
+      case 'winter':
+        return 'text-sky-300';
       default:
         return 'text-amber-400';
     }

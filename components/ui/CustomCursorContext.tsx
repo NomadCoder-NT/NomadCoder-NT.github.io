@@ -1,13 +1,14 @@
 'use client';
 
 import React, { createContext, useContext, useState, useCallback, useMemo } from 'react';
+import { SeasonId } from '@/types/portfolio';
 
 export interface MagneticTargetData {
   centerX: number;
   centerY: number;
   width: number;
   height: number;
-  seasonId?: 'summer' | 'monsoon' | 'autumn' | 'spring';
+  seasonId?: SeasonId;
 }
 
 interface CustomCursorContextType {

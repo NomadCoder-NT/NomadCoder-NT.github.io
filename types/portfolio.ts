@@ -1,4 +1,4 @@
-export type SeasonId = 'summer' | 'monsoon' | 'autumn' | 'spring';
+export type SeasonId = 'summer' | 'monsoon' | 'autumn' | 'spring' | 'winter';
 
 export interface SeasonInfo {
   id: SeasonId;

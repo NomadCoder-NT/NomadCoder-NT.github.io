@@ -77,6 +77,12 @@ export function NarrativeSection({
     if (currentSeason === 'autumn' && target === 'spring') {
       return 'from-yellow-400 via-emerald-400 to-teal-400';
     }
+    if (currentSeason === 'spring' && target === 'winter') {
+      return 'from-emerald-400 via-teal-400 to-sky-400';
+    }
+    if (currentSeason === 'winter' && target === 'winter') {
+      return 'from-sky-400 via-cyan-400 to-blue-500';
+    }
     return 'from-emerald-400 via-teal-400 to-cyan-400';
   };
 
@@ -147,6 +153,7 @@ export function NarrativeSection({
     monsoon: 'text-cyan-400 group-hover:text-cyan-300',
     autumn: 'text-yellow-400 group-hover:text-yellow-300',
     spring: 'text-emerald-400 group-hover:text-emerald-300',
+    winter: 'text-sky-300 group-hover:text-sky-200',
   }[section.seasonId];
 
   const seasonBorderClass = {
@@ -154,6 +161,7 @@ export function NarrativeSection({
     monsoon: 'hover:border-cyan-400/40',
     autumn: 'hover:border-yellow-500/40',
     spring: 'hover:border-emerald-500/40',
+    winter: 'hover:border-sky-400/40',
   }[section.seasonId];
 
   const seasonBadgeBorder = {
@@ -161,6 +169,7 @@ export function NarrativeSection({
     monsoon: 'border-cyan-400/30 text-cyan-400 bg-cyan-400/10',
     autumn: 'border-yellow-500/30 text-yellow-400 bg-yellow-500/10',
     spring: 'border-emerald-500/30 text-emerald-400 bg-emerald-500/10',
+    winter: 'border-sky-400/30 text-sky-300 bg-sky-400/10',
   }[section.seasonId];
 
   const seasonProgressGradient = {
@@ -168,6 +177,7 @@ export function NarrativeSection({
     monsoon: 'from-cyan-400 via-sky-400 to-blue-500 shadow-[0_0_12px_rgba(0,240,255,0.7)]',
     autumn: 'from-yellow-500 via-amber-400 to-yellow-300 shadow-[0_0_12px_rgba(234,179,8,0.7)]',
     spring: 'from-emerald-500 via-teal-400 to-cyan-400 shadow-[0_0_12px_rgba(16,185,129,0.7)]',
+    winter: 'from-sky-400 via-cyan-300 to-blue-500 shadow-[0_0_12px_rgba(56,189,248,0.7)]',
   }[section.seasonId];
 
   const seasonGlowRingStyles = {
@@ -206,6 +216,15 @@ export function NarrativeSection({
       toolBorder: 'border-emerald-500/30 shadow-[0_8px_32px_rgba(16,185,129,0.2)]',
       pulseDot: 'bg-emerald-400',
       badge: 'text-emerald-300 bg-emerald-500/15 border-emerald-500/30',
+    },
+    winter: {
+      ring1: 'border-sky-400/50 shadow-[0_0_28px_rgba(56,189,248,0.32)]',
+      ring2: 'border-sky-400/30 shadow-[0_0_45px_rgba(56,189,248,0.18)]',
+      ring3: 'border-sky-400/15',
+      ambientGlow: 'bg-sky-500/20',
+      toolBorder: 'border-sky-500/30 shadow-[0_8px_32px_rgba(56,189,248,0.2)]',
+      pulseDot: 'bg-sky-400',
+      badge: 'text-sky-300 bg-sky-500/15 border-sky-400/30',
     },
   }[section.seasonId];
 

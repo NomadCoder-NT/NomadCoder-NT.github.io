@@ -4,11 +4,53 @@
   :root {
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* Default Season: Summer */
+    --season-bg: #080402;
+    --season-accent: #f59e0b;
+    --season-border: rgba(245, 158, 11, 0.15);
+    --season-glow: rgba(245, 158, 11, 0.08);
+  }
+
+  [data-season="summer"] {
+    --season-bg: #080402;
+    --season-accent: #f59e0b;
+    --season-border: rgba(245, 158, 11, 0.15);
+    --season-glow: rgba(245, 158, 11, 0.08);
+  }
+
+  [data-season="monsoon"] {
+    --season-bg: #02060f;
+    --season-accent: #00f0ff;
+    --season-border: rgba(0, 240, 255, 0.15);
+    --season-glow: rgba(0, 240, 255, 0.08);
+  }
+
+  [data-season="autumn"] {
+    --season-bg: #060501;
+    --season-accent: #eab308;
+    --season-border: rgba(234, 179, 8, 0.15);
+    --season-glow: rgba(234, 179, 8, 0.08);
+  }
+
+  [data-season="spring"] {
+    --season-bg: #010905;
+    --season-accent: #10b981;
+    --season-border: rgba(16, 185, 129, 0.15);
+    --season-glow: rgba(16, 185, 129, 0.08);
+  }
+
+  [data-season="winter"] {
+    --season-bg: #020814;
+    --season-accent: #38bdf8;
+    --season-border: rgba(56, 189, 248, 0.15);
+    --season-glow: rgba(56, 189, 248, 0.08);
   }
 
   body {
-    background-color: #05070c;
+    background-color: var(--season-bg, #080402);
     color: #f3f4f6;
+    transition: background-color 0.8s cubic-bezier(0.16, 1, 0.3, 1), color 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
