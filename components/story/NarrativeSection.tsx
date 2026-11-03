@@ -2,7 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowRight } from 'lucide-react';
 import { NarrativeSectionData, SeasonId } from '@/types/portfolio';
 
 interface NarrativeSectionProps {
@@ -99,6 +99,12 @@ export function NarrativeSection({
       ? section.narrativeParagraphs
       : [section.summary];
 
+  const isInfrastructureChapter = section.id === 'ignition' || section.id === 'hardware-forge';
+  const isAdTechChapter = section.id === 'data-monsoon' || section.id === 'cloud-canopy';
+  const isWealthChapter = section.id === 'the-harvest';
+  const isHeritageChapter = section.id === 'roots-structure';
+  const isStudioChapter = section.id === 'the-horizon';
+
   return (
     <section
       ref={sectionRef}
@@ -122,9 +128,9 @@ export function NarrativeSection({
         className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-16 relative z-10 pointer-events-auto"
       >
         {/* ========================================================================= */}
-        {/* LEFT COLUMN (w-full lg:w-[45%]): NARRATIVE, METRICS & TECHNICAL CONTRIBUTIONS */}
+        {/* LEFT COLUMN (w-full lg:w-[45%]): DEDICATED EDITORIAL DOSSIER             */}
         {/* ========================================================================= */}
-        <div className="w-full lg:w-[45%] space-y-8">
+        <div className="w-full lg:w-[45%] space-y-7">
           {/* Monospace Kicker */}
           <div className="flex items-center gap-2.5 text-xs font-mono tracking-widest uppercase font-semibold">
             <span className={`w-2 h-2 rounded-full ${seasonPulseDot}`} />
@@ -146,7 +152,7 @@ export function NarrativeSection({
             </div>
           </div>
 
-          {/* Candid First-Person Narrative directly on dark background */}
+          {/* Candid First-Person Narrative directly on obsidian background */}
           <div className="space-y-4 text-sm sm:text-[15px] text-neutral-300 leading-relaxed font-sans pt-1 border-t border-white/[0.08]">
             {paragraphs.map((paragraph, idx) => (
               <p key={idx} className="text-neutral-300/90 leading-relaxed font-normal">
@@ -155,39 +161,240 @@ export function NarrativeSection({
             ))}
           </div>
 
-          {/* Clean Borderless Metrics: Large Monospace Numbers + Uppercase Labels */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-white/[0.08]">
-            {section.metrics.map((metric, idx) => (
-              <div key={idx} className="space-y-1">
-                <div className="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-white tabular-nums">
-                  {metric.value}
+          {/* ===================================================================== */}
+          {/* FORMAT 1: CHAPTERS 01-02 (AMAZON & DELL) — TERMINAL LOGS & BORDERLESS  */}
+          {/* ===================================================================== */}
+          {isInfrastructureChapter && (
+            <div className="space-y-6 pt-4 border-t border-white/[0.08]">
+              {/* Borderless Metrics */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                {section.metrics.map((metric, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-white tabular-nums">
+                      {metric.value}
+                    </div>
+                    <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-400 font-semibold">
+                      {metric.label}
+                    </div>
+                    <div className="text-xs text-neutral-500 font-sans leading-tight">
+                      {metric.detail}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Terminal-style Incident Logs */}
+              <div className="space-y-3 font-mono text-xs sm:text-sm pt-2">
+                <div className="text-[11px] uppercase tracking-widest text-neutral-500 font-semibold">
+                  // INFRASTRUCTURE & FIRMWARE INCIDENT LOG
                 </div>
-                <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-400 font-semibold">
-                  {metric.label}
-                </div>
-                <div className="text-xs text-neutral-500 font-sans leading-tight">
-                  {metric.detail}
+                <div className="space-y-2.5">
+                  {section.highlights.map((highlight, idx) => (
+                    <div key={idx} className="flex items-start gap-2.5 text-neutral-300 leading-relaxed">
+                      <span className="text-[#e08a3c] select-none shrink-0">$</span>
+                      <span>{highlight}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          )}
 
-          {/* Key Technical Contributions */}
-          <div className="space-y-3 pt-2">
-            <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-500 font-semibold">
-              // ARCHITECTURAL DELIVERABLES & TECHNICAL IMPACT
-            </div>
-            <div className="space-y-3">
-              {section.highlights.map((highlight, idx) => (
-                <div
-                  key={idx}
-                  className={`border-l-2 pl-4 py-1 text-sm text-neutral-300 leading-relaxed ${seasonBorderLClass}`}
-                >
-                  {highlight}
+          {/* ===================================================================== */}
+          {/* FORMAT 2: CHAPTERS 03-04 (GOOGLE & ACCENTURE) — AUCTION LEDGER GRID   */}
+          {/* ===================================================================== */}
+          {isAdTechChapter && (
+            <div className="space-y-6 pt-4 border-t border-white/[0.08]">
+              {/* Tabular Auction Ledger Grid */}
+              <div className="border border-white/[0.08] divide-y divide-white/[0.08] font-mono rounded-lg overflow-hidden">
+                <div className="bg-white/[0.02] px-4 py-2 flex items-center justify-between text-[11px] tracking-wider text-neutral-400 font-semibold uppercase">
+                  <span>AUCTION PARAMETER</span>
+                  <span>LEDGER VALUE</span>
                 </div>
-              ))}
+                {section.metrics.map((metric, idx) => (
+                  <div
+                    key={idx}
+                    className="px-4 py-3 flex items-center justify-between hover:bg-white/[0.015] transition-colors"
+                  >
+                    <div>
+                      <div className="text-xs text-neutral-200 font-medium">{metric.label}</div>
+                      <div className="text-[11px] text-neutral-500 font-sans">{metric.detail}</div>
+                    </div>
+                    <div className="text-2xl sm:text-3xl font-bold tracking-tight text-[#38bdf8] tabular-nums">
+                      {metric.value}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Algorithmic Deliverables */}
+              <div className="space-y-2.5 pt-1">
+                <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-500 font-semibold">
+                  // ALGORITHMIC SCALING DELIVERABLES
+                </div>
+                {section.highlights.map((highlight, idx) => (
+                  <div
+                    key={idx}
+                    className={`border-l-2 pl-4 py-1 text-sm text-neutral-300 leading-relaxed ${seasonBorderLClass}`}
+                  >
+                    {highlight}
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* ===================================================================== */}
+          {/* FORMAT 3: CHAPTER 05 (ICICI BANK) — FIDUCIARY ALLOCATION BREAKDOWN    */}
+          {/* ===================================================================== */}
+          {isWealthChapter && (
+            <div className="space-y-6 pt-4 border-t border-white/[0.08]">
+              {/* Monospace Metrics */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                {section.metrics.map((metric, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-white tabular-nums">
+                      {metric.value}
+                    </div>
+                    <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-400 font-semibold">
+                      {metric.label}
+                    </div>
+                    <div className="text-xs text-neutral-500 font-sans leading-tight">
+                      {metric.detail}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Fiduciary Asset Allocation Breakdown Bars */}
+              <div className="p-4 rounded-lg border border-white/[0.08] bg-white/[0.015] space-y-3 font-mono text-xs">
+                <div className="text-[11px] uppercase tracking-widest text-neutral-400 font-semibold flex items-center justify-between">
+                  <span>FIDUCIARY ALLOCATION // RISK PARITY</span>
+                  <span className="text-[#d4af37]">₹12Cr+ AUM</span>
+                </div>
+                <div className="space-y-2.5">
+                  <div>
+                    <div className="flex justify-between text-[11px] text-neutral-300 pb-1">
+                      <span>EQUITY ALPHA & BALANCED GROWTH</span>
+                      <span className="text-white font-bold">42%</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+                      <div className="h-full bg-[#d4af37] rounded-full" style={{ width: '42%' }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-[11px] text-neutral-300 pb-1">
+                      <span>SOVEREIGN DEBT & FIXED INCOME</span>
+                      <span className="text-white font-bold">38%</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+                      <div className="h-full bg-amber-400 rounded-full" style={{ width: '38%' }} />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between text-[11px] text-neutral-300 pb-1">
+                      <span>TRADE LIQUIDITY & LC CREDIT</span>
+                      <span className="text-white font-bold">20%</span>
+                    </div>
+                    <div className="h-1.5 w-full bg-white/[0.06] rounded-full overflow-hidden">
+                      <div className="h-full bg-orange-400 rounded-full" style={{ width: '20%' }} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Underwriting Deliverables */}
+              <div className="space-y-2.5">
+                {section.highlights.map((highlight, idx) => (
+                  <div
+                    key={idx}
+                    className={`border-l-2 pl-4 py-1 text-sm text-neutral-300 leading-relaxed ${seasonBorderLClass}`}
+                  >
+                    {highlight}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ===================================================================== */}
+          {/* FORMAT 4: CHAPTER 06 (TEMPLECITY ATELIER) — 3D SPOTLIGHT & ATELIER    */}
+          {/* ===================================================================== */}
+          {isHeritageChapter && (
+            <div className="space-y-6 pt-4 border-t border-white/[0.08]">
+              {/* CAD & Additive Metrics */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                {section.metrics.map((metric, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-white tabular-nums">
+                      {metric.value}
+                    </div>
+                    <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-400 font-semibold">
+                      {metric.label}
+                    </div>
+                    <div className="text-xs text-neutral-500 font-sans leading-tight">
+                      {metric.detail}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Additive Manufacturing Highlights leading into Bench */}
+              <div className="space-y-2.5 pt-1">
+                <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-500 font-semibold flex items-center justify-between">
+                  <span>// REVERSE-ENGINEERING & METALLURGY</span>
+                  <span className="text-[#34d399] flex items-center gap-1 text-[10px]">
+                    PIPELINE BENCH BELOW <ArrowRight className="w-3 h-3" />
+                  </span>
+                </div>
+                {section.highlights.map((highlight, idx) => (
+                  <div
+                    key={idx}
+                    className={`border-l-2 pl-4 py-1 text-sm text-neutral-300 leading-relaxed ${seasonBorderLClass}`}
+                  >
+                    {highlight}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ===================================================================== */}
+          {/* FORMAT 5: CHAPTER 07 (STUDIO) — APEX PERFORMANCE SPEC SHEET           */}
+          {/* ===================================================================== */}
+          {isStudioChapter && (
+            <div className="space-y-6 pt-4 border-t border-white/[0.08]">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                {section.metrics.map((metric, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="text-3xl sm:text-4xl font-mono font-bold tracking-tight text-white tabular-nums">
+                      {metric.value}
+                    </div>
+                    <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-400 font-semibold">
+                      {metric.label}
+                    </div>
+                    <div className="text-xs text-neutral-500 font-sans leading-tight">
+                      {metric.detail}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="space-y-2.5 pt-1">
+                <div className="text-[11px] font-mono uppercase tracking-widest text-neutral-500 font-semibold">
+                  // FULL-STACK 3D WEBGL & VECTOR RAG SPECIFICATIONS
+                </div>
+                {section.highlights.map((highlight, idx) => (
+                  <div
+                    key={idx}
+                    className={`border-l-2 pl-4 py-1 text-sm text-neutral-300 leading-relaxed ${seasonBorderLClass}`}
+                  >
+                    {highlight}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Clean Horizontal Tech Stack Row with Monospace Dividers */}
           <div className="pt-6 border-t border-white/[0.08] text-xs font-mono text-neutral-400 flex flex-wrap items-center gap-x-2.5 gap-y-1.5">

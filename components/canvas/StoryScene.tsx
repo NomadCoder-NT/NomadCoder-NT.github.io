@@ -252,9 +252,9 @@ export function StoryScene({
       ambientLightRef.current.color.lerp(targetAmbient, 0.06);
     }
     if (spotLightRef.current) {
-      spotLightRef.current.target.position.set(isMobile ? 0 : 1.5, -0.5, -1);
+      spotLightRef.current.target.position.set(isMobile ? 0 : 2.8, -0.2, -1);
       spotLightRef.current.target.updateMatrixWorld();
-      spotLightRef.current.color.lerp(targetSpot, 0.06);
+      spotLightRef.current.color.lerp(targetSpot, 0.08);
     }
     if (fogRef.current) {
       fogRef.current.color.lerp(targetFog, 0.06);
